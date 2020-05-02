@@ -1,8 +1,8 @@
-<p>Title of Project: LitterTracker</p> <br/>
-<p>Description of Project: Helps visually represent how efficiently cleaning is being done throughout PGC </p><br/>
-<p>Link to App: https://littertracker.herokuapp.com/ </p><br/>
-<p>Target Browsers: Google Chrome, Mozilla Firefox, Safari, Microsoft Edge </p><br/>
-<p>Link to User Manual: https://github.com/curtisellison/finalproject377/blob/master/docs/user.md </p><br/>
+<p>Title of Project: Prince George County Public School - Literacy 490</p>
+<p>Description of Project: Helps visually represent how environment-friendly schools are throughout PGC</p>
+<p>Link to App: http://localhost/</p>
+<p>Target Browsers: Google Chrome, Mozilla Firefox, Safari, Microsoft Edge</p>
+<p>Link to User Manual: https://github.com/asandin218/pgcps_enviro_literacy490/README.md</p><br/>
 <p>Link to Developer Manual: See below. </p><br/>
 
 # Developer Manual
@@ -12,11 +12,14 @@
       <ul>git clone "https://github.com/curtisellison/finalproject377.git</ul>
     <li>Install npm for your specific OS</li>
       <ul> https://nodejs.org/en/download/ </ul>
-    <li>Execute npm install command</li>
+    <li>Execute 'npm install' command</li>
+    <li>Execute 'pip install wheel' command</li>
+    <li>Execute 'python -m pip install --upgrade pip' command</li>
+    <li>Execute 'pip install express requests bs4 pymysql' command</li>
   </ol>
 <h1>How to run application on a server </h1>
   <ol>
-    <li>Execute npm start command</li>
+    <li>Execute 'npm start' command</li>
     <li>Open browser and connect to the local host</li>
   </ol>
 <h1>How to run tests </h1>
