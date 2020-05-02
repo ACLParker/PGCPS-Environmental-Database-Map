@@ -1,96 +1,96 @@
 const m = new Map([['color', 'red'], ['owner', 'Flavio'], ['age', 2]])
 
 const JSON_KEY_TO_OPTION_NAMES = new Map([
-    ["section1_time_stamp", "Time Stamp"],
-    ["section1_email", "Email"],
-    ["section1_school_name", "School Name"],
-    ["section1_green_school_certification", "Green School Certification"],
-    ["section1_active_garden_vegetable_garden", "Active Gardens: Vegetable Garden"],
-    ["section1_active_garden_native_garden", "Active Gardens: Native Garden"],
-    ["section1_active_garden_butterfly_garden", "Active Gardens: Butterfly Garden"],
-    ["section1_active_garden_rain_garden", "Active Gardens: Rain Garden"],
-    ["section1_active_garden_zen_garden", "Active Gardens: Zen Garden"],
-    ["section1_active_garden_herb_garden", "Active Gardens: Herb Garden"],
-    ["section1_active_garden_no_gardens_on_campus", "Active Gardens: No gardens on campus"],
-    ["section1_active_garden_dont_know", "Active Gardens: I don't know"],
-    ["section1_recycle_at_breakfast", "Recycle: At Breakfast"],
-    ["section1_recycle_at_lunch", "Recycle: At Lunch"],
-    ["section1_recycle_in_the_classroom", "Recycle: In the classroom"],
-    ["section1_recycle_not_at_all", "Recycle: Not at all"],
-    ["section1_recycle_dont_know", "Recycle: I don't know"],
-    ["section1_recycling_program_ink_cartridge_recycling", "Recycling Program: Ink Cartridge Recycling"],
-    ["section1_recycling_program_phones_batteries_other", "Recycling Program: Cellphones, Batteries, Others"],
-    ["section1_recycling_program_terra_cycling", "Recycling Program: Terra Cycling"],
-    ["section1_recycling_program_color_cycle_crayola", "Recycling Program: Color Cycle (Crayola)"],
-    ["section1_recycling_program_pepsi_recycle_rally", "Recycling Program: Pepsi Recycle Rally"],
-    ["section1_recycling_program_none_programs_activities", "Recycling Program: No Programs/Activities"],
-    ["section1_recycling_program_dont_know", "Recycling Program: I don't know"],
-    ["section1_composting_we_did_not_compost_at_our_school", "Composting: No compost at school"],
-    ["section1_composting_vermiculture", "Composting: Vermiculture"],
-    ["section1_composting_drum_compost", "Composting: Drum Compost"],
-    ["section1_composting_open_frame", "Composting: Open Frame"],
-    ["section1_composting_send_compost_local_facility_farm", "Composting: Send to Local Facility/Farm"],
-    ["section1_composting_dont_know", "Composting: I don't know"],
-    ["section1_cleanup_volunteer_effort", "Cleanup Volunteer Effort"],
-    ["section1_waste_reduction_comments", "Waste Reduction Comments"],
-    ["section2_reducing_water_strategy", "Reducing Water Strategy"],
-    ["section2_stream", "Stream"],
-    ["section2_water_prevention_stream_bank_planting", "Water Prevention: Stream Bank Planting"],
-    ["section2_water_prevention_erosion_control_project", "Water Prevention: Erosion Control Project other than Stream Bank Planting"],
-    ["section2_water_prevention_painted_storm_drains", "Water Prevention: Painted Storm Drains"],
-    ["section2_water_prevention_raingarden_bioretention_area_planted", "Water Prevention: Raingarden/bioretention area planted"],
-    ["section2_water_prevention_no_mow_zone", "Water Prevention: No-mow zone installed "],
-    ["section2_water_prevention_rain_barrels", "Water Prevention: Rain barrels installed"],
-    ["section2_water_prevention_stream_cleaning", "Water Prevention: Stream Cleaning"],
-    ["section2_water_prevention_collected_litter", "Water Prevention: Collected litter to prevent water pollution"],
-    ["section2_water_prevention_turf_eduction", "Water Prevention: Turf Eduction"],
-    ["section2_water_prevention_surface_reduction", "Water Prevention: Impervious surface reduction"],
-    ["section2_water_prevention_green_roof", "Water Prevention: Green Roof"],
-    ["section2_water_prevention_retrofitted_sink_toilet_showers", "Water Prevention: Retrofitted sinks, toilets, showers"],
-    ["section2_runoff_strategy", "Runoff Strategy"],
-    ["section2_water_conservation_comments", "Water Conservation Comments"],
-    ["section3_reduce_energy_strategy", "Reduce Energy Strategy"],
-    ["section3_energy_conservation_installed_efficient_lighting", "Energy Conservation: Installed efficient lighting"],
-    ["section3_energy_conservation_use_daylighting", "Energy Conservation: Use Daylighting most of the day"],
-    ["section3_energy_conservation_delamped", "Energy Conservation: Delamped"],
-    ["section3_energy_conservation_planted_tree_shading", "Energy Conservation: Planted trees to shade building"],
-    ["section3_energy_conservation_use_of_blinds", "Energy Conservation: Use of blinds in the classroom"],
-    ["section3_renewable_energy", "Renewable Energy"],
-    ["section3_renewable_source_solar", "Renewable Source: Solar"],
-    ["section3_renewable_source_wind", "Renewable Source: Wind"],
-    ["section3_renewable_source_geothermal", "Renewable Source: Geothermal"],
-    ["section3_energy_conservation_comments", "Energy Conservation Comments"],
-    ["section4_restore_habitat", "Restore Habitat"],
-    ["section4_habitat_restoration_created_bird_houses", "Habitat Restoration: Created/Installed bird houses"],
-    ["section4_habitat_restoration_planted_native_trees", "Habitat Restoration: Planted Native Trees"],
-    ["section4_habitat_restoration_planted_native_shrubs", "Habitat Restoration: Planted Native Shrubs"],
-    ["section4_habitat_restoration_removal_invasive_species", "Habitat Restoration: Removal of invasive species"],
-    ["section4_habitat_restoration_created_native_habitat", "Habitat Restoration: Native habitat - meadows, wetlands or forests"],
-    ["section4_habit_restoration_comments", "Habit Restoration Comments"],
-    ["section4_enviro_learning_structures", "Environmental Learning Structures"],
-    ["section4_env_learn_struct_interpretive_signage", "Env. Learning Struct.: Interpretive signage"],
-    ["section4_env_learn_struct_trails_pathways", "Env. Learning Struct.: Trails, pathways"],
-    ["section4_env_learn_struct_boardwalk_bridges", "Env. Learning Struct.: Boardwalk, bridges"],
-    ["section4_env_learn_struct_tree_plant_id_tags", "Env. Learning Struct.: Tree/Plant ID Tags"],
-    ["section4_env_learn_struct_outdoor_classroom", "Env. Learning Struct.: Outdoor Classroom"],
-    ["section4_env_learn_struct_outdoor_environmental_art", "Env. Learning Struct.: Outdoor environmental art"],
-    ["section4_env_learn_struct_greenhouse", "Env. Learning Struct.: Greenhouse"],
-    ["section4_env_learn_struct_tower_garden", "Env. Learning Struct.: Tower garden"],
-    ["section4_env_learn_struct_weather_station", "Env. Learning Struct.: Weather Station"],
-    ["section4_env_learn_struct_pond", "Env. Learning Struct.: Pond"],
-    ["section4_env_learn_struct_hydroponics", "Env. Learning Struct.: Hydroponics "],
-    ["section4_env_learn_struct_aquaponics", "Env. Learning Struct.: Aquaponics"],
-    ["section4_enviro_structure_comments", "Environmental Structure Comments"],
-    ["section5_no_idle_zone", "No Idle Zone"],
-    ["section5_formal_carpooling", "Formal Carpooling Program"],
-    ["section5_electric_hybrid_parking", "Parking for Electric, Hybrid Vehicle"],
-    ["section5_grow_donate_eat_garden", "Grow/Donate Eat Food in Garden"],
-    ["section5_green_cleaning_products", "Green Cleaning Products"],
-    ["section5_community_science_program", "Community Science Program"],
-    ["section6_enviro_awards", "Environmental Awards"],
-    ["section6_actions_not_mentioned", "Actions Not Mentioned"],
-    ["latitude", "Latitude"],
-    ["longitude", "Longitude"]
+    ["section1_time_stamp", "Section 1: Time Stamp", "Time when survey was submitted"],
+    ["section1_email", "Email", ""],
+    ["section1_school_name", "School Name", ""],
+    ["section1_green_school_certification", "Green School Certification", ""],
+    ["section1_active_garden_vegetable_garden", "Active Gardens: Vegetable Garden", ""],
+    ["section1_active_garden_native_garden", "Active Gardens: Native Garden", ""],
+    ["section1_active_garden_butterfly_garden", "Active Gardens: Butterfly Garden", ""],
+    ["section1_active_garden_rain_garden", "Active Gardens: Rain Garden", ""],
+    ["section1_active_garden_zen_garden", "Active Gardens: Zen Garden", ""],
+    ["section1_active_garden_herb_garden", "Active Gardens: Herb Garden", ""],
+    ["section1_active_garden_no_gardens_on_campus", "Active Gardens: No gardens on campus", ""],
+    ["section1_active_garden_dont_know", "Active Gardens: I don't know", ""],
+    ["section1_recycle_at_breakfast", "Recycle: At Breakfast", ""],
+    ["section1_recycle_at_lunch", "Recycle: At Lunch", ""],
+    ["section1_recycle_in_the_classroom", "Recycle: In the classroom", ""],
+    ["section1_recycle_not_at_all", "Recycle: Not at all", ""],
+    ["section1_recycle_dont_know", "Recycle: I don't know", ""],
+    ["section1_recycling_program_ink_cartridge_recycling", "Recycling Program: Ink Cartridge Recycling", ""],
+    ["section1_recycling_program_phones_batteries_other", "Recycling Program: Cellphones, Batteries, Others", ""],
+    ["section1_recycling_program_terra_cycling", "Recycling Program: Terra Cycling", ""],
+    ["section1_recycling_program_color_cycle_crayola", "Recycling Program: Color Cycle (Crayola)", ""],
+    ["section1_recycling_program_pepsi_recycle_rally", "Recycling Program: Pepsi Recycle Rally", ""],
+    ["section1_recycling_program_none_programs_activities", "Recycling Program: No Programs/Activities", ""],
+    ["section1_recycling_program_dont_know", "Recycling Program: I don't know", ""],
+    ["section1_composting_we_did_not_compost_at_our_school", "Composting: No compost at school", ""],
+    ["section1_composting_vermiculture", "Composting: Vermiculture", ""],
+    ["section1_composting_drum_compost", "Composting: Drum Compost", ""],
+    ["section1_composting_open_frame", "Composting: Open Frame", ""],
+    ["section1_composting_send_compost_local_facility_farm", "Composting: Send to Local Facility/Farm", ""],
+    ["section1_composting_dont_know", "Composting: I don't know", ""],
+    ["section1_cleanup_volunteer_effort", "Cleanup Volunteer Effort", ""],
+    ["section1_waste_reduction_comments", "Waste Reduction Comments", ""],
+    ["section2_reducing_water_strategy", "Reducing Water Strategy", ""],
+    ["section2_stream", "Stream", ""],
+    ["section2_water_prevention_stream_bank_planting", "Water Prevention: Stream Bank Planting", ""],
+    ["section2_water_prevention_erosion_control_project", "Water Prevention: Erosion Control Project other than Stream Bank Planting", ""],
+    ["section2_water_prevention_painted_storm_drains", "Water Prevention: Painted Storm Drains", ""],
+    ["section2_water_prevention_raingarden_bioretention_area_planted", "Water Prevention: Raingarden/bioretention area planted", ""],
+    ["section2_water_prevention_no_mow_zone", "Water Prevention: No-mow zone installed ", ""],
+    ["section2_water_prevention_rain_barrels", "Water Prevention: Rain barrels installed", ""],
+    ["section2_water_prevention_stream_cleaning", "Water Prevention: Stream Cleaning", ""],
+    ["section2_water_prevention_collected_litter", "Water Prevention: Collected litter to prevent water pollution", ""],
+    ["section2_water_prevention_turf_eduction", "Water Prevention: Turf Eduction", ""],
+    ["section2_water_prevention_surface_reduction", "Water Prevention: Impervious surface reduction", ""],
+    ["section2_water_prevention_green_roof", "Water Prevention: Green Roof", ""],
+    ["section2_water_prevention_retrofitted_sink_toilet_showers", "Water Prevention: Retrofitted sinks, toilets, showers", ""],
+    ["section2_runoff_strategy", "Runoff Strategy", ""],
+    ["section2_water_conservation_comments", "Water Conservation Comments", ""],
+    ["section3_reduce_energy_strategy", "Reduce Energy Strategy", ""],
+    ["section3_energy_conservation_installed_efficient_lighting", "Energy Conservation: Installed efficient lighting", ""],
+    ["section3_energy_conservation_use_daylighting", "Energy Conservation: Use Daylighting most of the day", ""],
+    ["section3_energy_conservation_delamped", "Energy Conservation: Delamped", ""],
+    ["section3_energy_conservation_planted_tree_shading", "Energy Conservation: Planted trees to shade building", ""],
+    ["section3_energy_conservation_use_of_blinds", "Energy Conservation: Use of blinds in the classroom", ""],
+    ["section3_renewable_energy", "Renewable Energy", ""],
+    ["section3_renewable_source_solar", "Renewable Source: Solar", ""],
+    ["section3_renewable_source_wind", "Renewable Source: Wind", ""],
+    ["section3_renewable_source_geothermal", "Renewable Source: Geothermal", ""],
+    ["section3_energy_conservation_comments", "Energy Conservation Comments", ""],
+    ["section4_restore_habitat", "Restore Habitat", ""],
+    ["section4_habitat_restoration_created_bird_houses", "Habitat Restoration: Created/Installed bird houses", ""],
+    ["section4_habitat_restoration_planted_native_trees", "Habitat Restoration: Planted Native Trees", ""],
+    ["section4_habitat_restoration_planted_native_shrubs", "Habitat Restoration: Planted Native Shrubs", ""],
+    ["section4_habitat_restoration_removal_invasive_species", "Habitat Restoration: Removal of invasive species", ""],
+    ["section4_habitat_restoration_created_native_habitat", "Habitat Restoration: Native habitat - meadows, wetlands or forests", ""],
+    ["section4_habit_restoration_comments", "Habit Restoration Comments", ""],
+    ["section4_enviro_learning_structures", "Environmental Learning Structures", ""],
+    ["section4_env_learn_struct_interpretive_signage", "Env. Learning Struct.: Interpretive signage", ""],
+    ["section4_env_learn_struct_trails_pathways", "Env. Learning Struct.: Trails, pathways", ""],
+    ["section4_env_learn_struct_boardwalk_bridges", "Env. Learning Struct.: Boardwalk, bridges", ""],
+    ["section4_env_learn_struct_tree_plant_id_tags", "Env. Learning Struct.: Tree/Plant ID Tags", ""],
+    ["section4_env_learn_struct_outdoor_classroom", "Env. Learning Struct.: Outdoor Classroom", ""],
+    ["section4_env_learn_struct_outdoor_environmental_art", "Env. Learning Struct.: Outdoor environmental art", ""],
+    ["section4_env_learn_struct_greenhouse", "Env. Learning Struct.: Greenhouse", ""],
+    ["section4_env_learn_struct_tower_garden", "Env. Learning Struct.: Tower garden", ""],
+    ["section4_env_learn_struct_weather_station", "Env. Learning Struct.: Weather Station", ""],
+    ["section4_env_learn_struct_pond", "Env. Learning Struct.: Pond", ""],
+    ["section4_env_learn_struct_hydroponics", "Env. Learning Struct.: Hydroponics ", ""],
+    ["section4_env_learn_struct_aquaponics", "Env. Learning Struct.: Aquaponics", ""],
+    ["section4_enviro_structure_comments", "Environmental Structure Comments", ""],
+    ["section5_no_idle_zone", "No Idle Zone", ""],
+    ["section5_formal_carpooling", "Formal Carpooling Program", ""],
+    ["section5_electric_hybrid_parking", "Parking for Electric, Hybrid Vehicle", ""],
+    ["section5_grow_donate_eat_garden", "Grow/Donate Eat Food in Garden", ""],
+    ["section5_green_cleaning_products", "Green Cleaning Products", ""],
+    ["section5_community_science_program", "Community Science Program", ""],
+    ["section6_enviro_awards", "Environmental Awards", ""],
+    ["section6_actions_not_mentioned", "Actions Not Mentioned", ""],
+    ["latitude", "Latitude", ""],
+    ["longitude", "Longitude", ""]
 ]);
 
 var mymap;
@@ -134,7 +134,7 @@ function populateLitterTypeDropDown() {
 	   }
 	   
      // Add the options to the drop-down and build the documentation page
-     var myselect = document.getElementById("type_filters_drop_down");
+     var myselect = document.getElementById("feature_filters_drop_down");
      for (let feature of features) {
         let opt = document.createElement('option');
         opt.appendChild(document.createTextNode(JSON_KEY_TO_OPTION_NAMES.get(feature)));
@@ -211,10 +211,9 @@ function populateSchoolNameDropDown() {
     }); 
 }
 
-function loadDataByLitterType() {
-   var myselect = document.getElementById("type_filters_drop_down");
+function loadDataByFeature() {
+   var myselect = document.getElementById("feature_filters_drop_down");
    var feature = myselect.options[myselect.selectedIndex].value;
-   var subFeature = "";
    var index = feature.indexOf(": ");   
    
    if(index != -1) {
@@ -429,16 +428,11 @@ function loadDataByTotalLitter(totalLitterType) {
 function populateLitterTypeDocumentation() {
    console.log("Populating Litter Type documentation.");
 
-   fetch('/api')
+   fetch('/getAllData')
    .then(res => res.json())
    .then(res => {
-      var data = res.data;
       var litterTypes = new Set(); // Prevents adding duplicate entries
-      for(let index = 0; index < data.length; index++) {
-         // Add the entry in lower case format. This way we won't get
-         // two entries such as: other and Other.
-         // Only add the entry if one of the total is greater than zero.
-         if(data[index].number_bags > 0 || data[index].total_tires > 0) {         
+      for(let index = 0; index < res.length; index++) {                  
             litterTypes.add(data[index].type_litter.toLowerCase());
          }
       }

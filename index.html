@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>LitterTracker</title>
+<title>LPGCPS Environmental Literacy Tracker</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link type="text/css" rel="stylesheet" href="styles.css">
@@ -33,8 +33,7 @@
    <!-- Header with image -->
    <header class="bgimg display-container grayscale-min" id="home">
       <div class="display-middle center">
-         <span class="text-white"
-            style="font-size: 90px; font-weight: bold; background-color: white">LitterTracker</span>
+         <span style="font-size: 40px; font-weight: bold; color: white; background-color: green">PGCPS Environmental Literacy Tracker</span>
       </div>
    </header>
 
@@ -46,8 +45,8 @@
             <fieldset class="group">
                <legend>Environmental Feature</legend>
                <div class="form-group">
-                  <select id="type_filters_drop_down" size="1"
-                     onchange="loadDataByLitterType()">
+                  <select id="feature_filters_drop_down" size="1"
+                     onchange="loadDataByFeature()">
                      <option value="">None</option>
                   </select>
                </div>

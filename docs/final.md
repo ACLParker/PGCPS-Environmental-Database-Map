@@ -1,14 +1,14 @@
 # final.md
 <h1>Title</h1> 
-  <p>LitterTracker<p/>
+  <p>PGCPS Environmental Literacy Tracker<p/>
 <h1>Team Members</h1> 
   <p>Andres Sandin, Curtis Ellison Jr., Thomas Saunders, Thomas Nguyen <p/>
 <h1>Link to App</h1>
-  <p>https://littertracker.herokuapp.com/ </p>
+  <p>http://localhost/ </p>
 <h1>Information problem we're trying to solve</h1>
   <p>Providing knowledge to the public regarding which PGC areas put in the least effort in terms of clean up. In doing so, we hope to promote more widespread efforts to clean the community. </p>
 <h1>Chosen Strategies and Solutions to the problem</h1>
-  <p>To provide an app (LitterTracker) which compares the trash collection in different areas. </p>
+  <p>To provide an app (PGCPS Environmental Literacy Tracker) which compares the trash collection in different areas. </p>
 <h1>Identified Stakeholders</h1>
   <p>The residents of PGC, the clean up organizations, PGC Council (Specifically TIEE committee members)  </p>
 <h1>Target Browsers </h1>
