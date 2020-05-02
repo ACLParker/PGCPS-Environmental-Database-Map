@@ -51,42 +51,30 @@
                   </select>
                </div>
             </fieldset>
-         </div>
-         
-		<div id="school_ratings_filters">
-            <fieldset class="group">
-               <legend>School Environmental Ratings</legend>
-               <div class="form-group">
-                  <select id="school_ratings_filters_drop_down" size="1"
-                     onchange="loadDataBySchoolRatings()">
-                     <option value="">None</option>
-                     <option value="all">All</option>
-                     <option value="wcapp">Water Conservation and Pollution Prevention</option>
-                     <option value="ec">Energy Conservation</option>
-                     <option value="hrasfel">Habitat Restoration and Structures for Environmental Learning</option>
-                     <option value="rtahse">Responsible Transportation and Healthy School Environment</option>
-                  </select>
-               </div>
-            </fieldset>
-         </div>
-         
+         </div>         
 
-         <div id="total_litter_filters">
+         <div id="school_ratings_filters">
             <fieldset class="group">
-               <legend>Total Litter</legend>
+               <legend>School Ratings</legend>
                <div class="form-group">
-                  <input type="radio" name="filter" value="tlf_all"
-                     onclick="loadDataByTotalLitter('all');" /><label>All</label>
-                  <input type="radio" name="filter" value="tlf_bags"
-                     onclick="loadDataByTotalLitter('number_bags');" /><label>Bags</label>
-                  <input type="radio" name="filter" value="tlf_tires"
-                     onclick="loadDataByTotalLitter('total_tires');" /><label>Tires</label>
+                  <input type="radio" name="filter" value="srf_all"
+                     onclick="displayMarkersBySectionRanking('srf_all');" /><label data-toggle="tooltip" data-placement="bottom" title="Include all sections">All</label>
+                  <input type="radio" name="filter" value="srf_section1"
+                     onclick="displayMarkersBySectionRanking('srf_section1');" /><label data-toggle="tooltip" data-placement="bottom" title="General, Garden, Recycling, Composting">Section 1</label>
+                  <input type="radio" name="filter" value="srf_section2"
+                    onclick="displayMarkersBySectionRanking('srf_section2');" /><label data-toggle="tooltip" data-placement="bottom" title="Water Conservation and Pollution Prevention">Section 2</label>
+                    <input type="radio" name="filter" value="srf_section3"
+                    onclick="displayMarkersBySectionRanking('srf_section3');" /><label data-toggle="tooltip" data-placement="bottom" title="Energy Conservation">Section 3</label>
+                    <input type="radio" name="filter" value="srf_section4"
+                    onclick="displayMarkersBySectionRanking('srf_section4');" /><label data-toggle="tooltip" data-placement="bottom" title="Habitat Restoration and Structures for Environmental Learning">Section 4</label>
+                    <input type="radio" name="filter" value="srf_section5"
+                    onclick="displayMarkersBySectionRanking('srf_section5');" /><label data-toggle="tooltip" data-placement="bottom" title="Responsible Transportation and Healthy School Environment">Section 5</label>                    
                </div>
             </fieldset>
          </div>
+         <div id="litterPerimeterId"><button type="button" onclick="loadDataForLitterPerimeter();">Area Covered</button></div>
       </div>
-
-      <div id="litterPerimeterId"><button type="button" onclick="loadDataForLitterPerimeter();">Litter Perimeter</button></div>
+     
       
       <!-- Map Container -->
       <div class="container" id="map">
