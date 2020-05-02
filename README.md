@@ -9,7 +9,7 @@
 <h1>How to install application and all dependencies</h1>
   <ol>
     <li>Download the source code from GitHub</li>
-      <ul>git clone "https://github.com/curtisellison/finalproject377.git</ul>
+      <ul>git clone "https://github.com/asandin218/pgcps_enviro_literacy490.git</ul>
     <li>Install npm for your specific OS</li>
       <ul> https://nodejs.org/en/download/ </ul>
     <li>Execute 'npm install' command</li>
@@ -21,6 +21,7 @@
   <ol>
     <li>Execute 'npm start' command</li>
     <li>Open browser and connect to the local host</li>
+    <li>http://localhost</li>
   </ol>
 <h1>How to run tests </h1>
   <ol>
@@ -28,10 +29,10 @@
   </ol>
 <h1>The API for the server application </h1>  
   <ol>
-    <li>To return all of the data points</li>
-      <ul> http://localhost/api </ul>
-    <li>To return all of the organizations</li>
-      <ul> http://localhost/api/organization </ul>
+    <li>To return all of the survey data</li>
+      <ul> http://localhost/getAllData</ul>
+    <li>To update database with all data from Google surveys</li>
+      <ul> http://localhost/updateDatabase </ul>
     <li>To return the organization that matches the filter (Below is DOC org example)</li>
       <ul> http://localhost/api/organization?filter=DOC </ul>
   </ol>

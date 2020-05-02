@@ -149,45 +149,6 @@ function populateLitterTypeDropDown() {
       console.log(res);
       return res;
     });
-   		
-   //fetch('http://localhost/PGCPS_Enviro_Info.json')
-   //fetch('http://localhost/test.json')
-//   fetch('https://docs.google.com/spreadsheets/d/1w1X00YL2uV_inK-l4VVbGXOXQpW1XoXlqkHFwDcJ-kc/edit#gid=487453530')
-//   .then(res => res.json())   
-//   .then(res => {
-//     var features = new Set(); // Prevents adding duplicate entries
-//	   for(var key in res[0]) {
-//		   if(!key.endsWith("_comments") && !key.endsWith("time_stamp") && 
-//				   !key.endsWith("school_name") && !key.endsWith("username") &&
-//				   !key.endsWith("school_id") && !key.endsWith("enviro_lit_rating") &&				   
-//				   !key.endsWith("enviro_awards") && !key.endsWith("latitude") && 
-//				   !key.endsWith("longitude")) {
-//			   if (typeof(res[0][key]) === 'object') {
-//				   for(var innerKey in res[0][key]) {
-//					   features.add(key + ": " + innerKey);
-//				   }
-//			   } else {
-//				   features.add(key);
-//			   }
-//		   }
-//	   }
-//	   
-//     // Add the options to the drop-down and build the documentation page
-//     var myselect = document.getElementById("type_filters_drop_down");
-//     for (let feature of features) {
-//        let opt = document.createElement('option');
-//        opt.appendChild(document.createTextNode(feature));
-//        // set value property of opt
-//        opt.value = feature; 
-//        // add option to the end of select box
-//        myselect.appendChild(opt); 
-//     }
-//      return features;
-//   })
-//   .then(res => {
-//      console.log(res);
-//      return res;
-//    }); 
 }
 
 function populateSchoolRatingsDropDown() {
@@ -224,7 +185,7 @@ function populateSchoolNameDropDown() {
    console.log("Populating School Name drop-down list.");
 
    //fetch('http://localhost/PGCPS_Enviro_Info.json')
-   fetch('/getData')
+   fetch('/getAllData')
    .then(res => res.json())   
    .then(res => {
 	   var schoolNames = new Set(); // Prevents adding duplicate entries
@@ -266,7 +227,7 @@ function loadDataByLitterType() {
    // NOTE: The first thing we do here is clear the markers from the layer.
    markersLayer.clearLayers();
    
-   fetch('/getData')   
+   fetch('/getAllData')   
       .then(res => res.json())      
       .then(res => {
     	  for(var index = 0; index < res.length; index++) {
