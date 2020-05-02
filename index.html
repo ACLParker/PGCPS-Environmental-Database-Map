@@ -12,7 +12,7 @@
 </head>
 
 
-<body onload="loadMap(); updateDatabase(); populateLitterTypeDropDown(); populateSchoolRatingsDropDown(); openHome();">
+<body onload="loadMap(); updateDatabase(); populateEnvFeaturesDropDown(); openHome();">
 
    <!-- Links (sit on top) -->
    <div class="top">
@@ -21,7 +21,7 @@
             <a href="#" class="button block black" onclick="openHome()">HOME</a>
          </div>
          <div class="col s4">
-            <a href="#about" class="button block black" onclick="openAbout()">ABOUT</a>
+            <a href="#survey_info" class="button block black" onclick="openSurveyInfo()">SURVEY INFO</a>
          </div>
          <div class="col s4">
             <a href="#menu" class="button block black"
@@ -52,19 +52,6 @@
                </div>
             </fieldset>
          </div>
-
-<!-- 		<div id="school_name_filters"> -->
-<!--             <fieldset class="group"> -->
-<!--                <legend>School Name</legend> -->
-<!--                <div class="form-group"> -->
-<!--                   <select id="school_name_filters_drop_down" size="1" -->
-<!--                      onchange="loadDataBySchoolName()"> -->
-<!--                      <option value="">None</option> -->
-<!--                      <option value="all">All</option> -->
-<!--                   </select> -->
-<!--                </div> -->
-<!--             </fieldset> -->
-<!--          </div> -->
          
 		<div id="school_ratings_filters">
             <fieldset class="group">
@@ -109,9 +96,9 @@
       </div>
 
 
-      <!-- About Container -->
+      <!-- Survey Info Container -->
       <div class="container">
-         <div class="content" id="about" style="max-width: 50%" />
+         <div class="content" id="survey_info" style="max-width: 50%" />
       </div>
 
 
