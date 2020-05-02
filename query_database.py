@@ -1,18 +1,15 @@
-import re
-import requests
 import json
 import pymysql
 import pymysql.cursors
-from bs4 import BeautifulSoup
+import sys
 
+#sys.argv[1]
 
 # Read ALL data from database and convert it to a JSON structure
 def convertDataToJson(mycursor):
     query = "SELECT * FROM pgcps_environmental_info"
     mycursor.execute(query)
     result = mycursor.fetchall()
-    surveys = []
-    columnNames = mycursor.description
     
     return json.dumps(result)
 

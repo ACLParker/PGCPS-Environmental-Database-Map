@@ -110,7 +110,7 @@ function loadMap() {
 function updateDatabase() {
 	console.log("Updating database with Google data.");
 	
-	fetch('/updateDatabaseAndGetData')
+	fetch('/updateDatabase')
 		.then(res => {
 		      console.log("Database updated.");
 		      return res;
@@ -119,7 +119,7 @@ function updateDatabase() {
 
 function populateLitterTypeDropDown() {
    console.log("Populating Litter Type drop-down list.");
-   fetch('/getData')
+   fetch('/getAllData')
     .then(res => res.json())   
    	.then(res => {   		
      var features = new Set(); // Prevents adding duplicate entries

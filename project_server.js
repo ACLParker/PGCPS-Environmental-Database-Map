@@ -13,7 +13,7 @@ app.use(express.static("./"));
 app.listen(port, () => console.log(`Server app listening on port ${port}!`));
  
 // API to update the local database with Google data
-app.get('/updateDatabaseAndGetData', (req, res) => {
+app.get('/updateDatabase', (req, res) => {
 	console.log("updateDatabaseAndGetData called") 
 	
     // Parameters passed in spawn - 
@@ -25,21 +25,23 @@ app.get('/updateDatabaseAndGetData', (req, res) => {
 });
 
 //API to get data from database and return it in JSON format.
-app.get('/getData', (req, res) => {
+app.get('/getAllData', (req, res) => {
 	console.log("getData called") 
 	
     // Parameters passed in spawn - 
     // 1. type_of_script 
     // 2. list containing Path of the script and arguments for the script
 	var spawn = require("child_process").spawnSync;
-    var process = spawn('python' ,["./read_database.py"]);
+    var process = spawn('python' ,["./read_all_database.py"]);
     res.send(JSON.parse(process.stdout.toString()));
 });
 
+// This is in case someone tries to use a PUT command 
 app.put("/", (req, res) => {
 	res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+// This is in case someone tries to use a POST command
 app.post("/", (req, res) => {
 	res.sendFile(path.join(__dirname + '/index.html'));
 });
