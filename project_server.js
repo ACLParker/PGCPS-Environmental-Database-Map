@@ -24,9 +24,9 @@ app.get('/updateDatabase', (req, res) => {
     res.send(JSON.parse(process.stdout.toString()));
 });
 
-//API to get data from database and return it in JSON format.
+// API to get ALL data from database and return it in JSON format.
 app.get('/getAllData', (req, res) => {
-	console.log("getData called") 
+	console.log("getAllData called") 
 	
     // Parameters passed in spawn - 
     // 1. type_of_script 
@@ -36,6 +36,19 @@ app.get('/getAllData', (req, res) => {
     res.send(JSON.parse(process.stdout.toString()));
 });
 
+// API to get some data from database and return it in JSON format.
+// It expects 2 parameters: columnName and value.
+app.get('/getDataByColumnName', (req, res) => {
+	console.log("getData called") 
+	
+    // Parameters passed in spawn - 
+    // 1. type_of_script 
+    // 2. list containing Path of the script and arguments for the script
+	var spawn = require("child_process").spawnSync;
+    var process = spawn('python' ,["./query_database.py", req.query.columnName, req.query.value]);
+    res.send(JSON.parse(process.stdout.toString()));
+});
+    	
 // This is in case someone tries to use a PUT command 
 app.put("/", (req, res) => {
 	res.sendFile(path.join(__dirname + '/index.html'));
