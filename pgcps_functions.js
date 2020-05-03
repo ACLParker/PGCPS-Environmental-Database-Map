@@ -138,36 +138,6 @@ function populateEnvFeaturesDropDown() {
    }
 }
 
-function populateSchoolRatingsDropDown() {
-	   console.log("Populating School Name drop-down list.");
-
-	   // fetch('http://localhost/PGCPS_Enviro_Info.json')
-// fetch('http://localhost/test.json')
-// .then(res => res.json())
-// .then(res => {
-// var schoolNames = new Set(); // Prevents adding duplicate entries
-// for(var index = 0; index < res.length; index++) {
-// schoolNames.add(res[index]['school_name']);
-// }
-//		   
-// // Add the options to the drop-down and build the documentation page
-// var myselect = document.getElementById("school_name_filters_drop_down");
-// for (let name of schoolNames) {
-// let opt = document.createElement('option');
-// opt.appendChild(document.createTextNode(name));
-// // set value property of opt
-// opt.value = name;
-// // add option to the end of select box
-// myselect.appendChild(opt);
-// }
-// return schoolNames;
-// })
-// .then(res => {
-// console.log(res);
-// return res;
-// });
-	}
-
 function populateSchoolNamesDropDown() {
    console.log("Populating School Name drop-down list.");
 
@@ -191,11 +161,7 @@ function populateSchoolNamesDropDown() {
         myselect.appendChild(opt); 
      }
       return schoolNames;
-   })
-   .then(res => {
-      console.log(res);
-      return res;
-    }); 
+   }); 
 }
 
 function displayMarkersByFeature() {
@@ -266,24 +232,6 @@ function loadDataBySchoolRatings() {
                    
                    // Add marker to the layer. Not displayed yet.
                    markersLayer.addLayer(circle);
-    			  
-    			  
-    			  
-    			  
-    			  
-    			  
-    			  
-    			  
-		          if(schoolName == "all" || res[index]['school_name'] == schoolName) {
-			          // Create a marker
-			          var marker = L.marker([latitude, longitude]);
-			          // Add a popup to the marker
-			          marker.bindPopup(
-			                "<b>" + res[index]['school_name'] + "</b><br>"
-			          ).openPopup();
-			          // Add marker to the layer. Not displayed yet.
-			          markersLayer.addLayer(marker);
-			       }
     		  }
 	     }
 	     // Display all the markers.
@@ -367,25 +315,28 @@ function loadDataBySchoolName() {
 	var myselect = document.getElementById("school_name_filters_drop_down");
 	var schoolName = myselect.options[myselect.selectedIndex].value;
 	   
-	var mydocumentation = document.getElementById("SchoolSurveyInfo");	
-	for (let feature of JSON_KEY_TO_OPTION_NAMES) {
-		let key = feature[0];		
-		let columnName = feature[1][0];
-		let description = feature[1][1]
-		let heading = document.createElement("h5");
-		let text = document.createTextNode(columnName);
-		heading.appendChild(text);
-		mydocumentation.appendChild(heading);
- 
-		let para = document.createElement("p");
-		para.className += "text-grey";
-		text = document.createTextNode(description);
-		para.appendChild(text);
-		mydocumentation.appendChild(para);
- 
-		let mybreak = document.createElement("br");
-		mydocumentation.appendChild(mybreak);
-	}
+	var mydocumentation = document.getElementById("surveyInfoContent");
+	
+	fetch('/getAllData?columnName=section1_school_name&value="' + schoolName + '"')   
+		.then(res => res.json())      
+		.then(res => {
+	    	Object.entries(res[0]).forEach(([key, value]) => {		
+	    		let name = JSON_KEY_TO_OPTION_NAMES.get(key)[0];
+	    		let heading = document.createElement("h5");
+	    		let text = document.createTextNode(name);
+	    		heading.appendChild(text);
+	    		mydocumentation.appendChild(heading);
+	     
+	    		let para = document.createElement("p");
+	    		para.className += "text-grey";
+	    		text = document.createTextNode(value);
+	    		para.appendChild(text);
+	    		mydocumentation.appendChild(para);
+	     
+	    		let mybreak = document.createElement("br");
+	    		mydocumentation.appendChild(mybreak);
+	    	});
+    });
 }
 
 function populateEnvFeaturesDocumentation() {
@@ -417,7 +368,7 @@ function populateEnvFeaturesDocumentation() {
 	}
 }
 
-function loadDataForLitterPerimeter() {
+function displayAreaCovered() {
    fetch('/getAllData')
    .then(res => res.json())  
    .then(res => {
@@ -467,22 +418,20 @@ function loadDataForLitterPerimeter() {
 function openHome() {
    var tabcontent = document.getElementById("survey_info");   
    tabcontent.style.display = "none";
-   tabcontent = document.getElementById("documentation");
+   tabcontent = document.getElementById("surveyInfoWrapper");
    tabcontent.style.display = "none";
+   tabcontent = document.getElementById("documentation");
+   tabcontent.style.display = "none";   
    
-   tabcontent = document.getElementById("wrapper");
+   tabcontent = document.getElementById("homeWrapper");
    tabcontent.style.display = "block";
-//   tabcontent = document.getElementById("litterPerimeterId");
-//   tabcontent.style.display = "block";
    tabcontent = document.getElementById("map");
    tabcontent.style.display = "block";
 }
 
 function openSurveyInfo() {
-   var tabcontent = document.getElementById("wrapper");
+   var tabcontent = document.getElementById("homeWrapper");
    tabcontent.style.display = "none";
-//   tabcontent = document.getElementById("litterPerimeterId");
-//   tabcontent.style.display = "none";
    tabcontent = document.getElementById("map");
    tabcontent.style.display = "none";   
    tabcontent = document.getElementById("documentation");
@@ -490,18 +439,20 @@ function openSurveyInfo() {
    
    tabcontent = document.getElementById("survey_info");
    tabcontent.style.display = "block";
+   tabcontent = document.getElementById("surveyInfoWrapper");
+   tabcontent.style.display = "block";
    
-   loadSurveyInfoPage(); 
+   //loadSurveyInfoPage(); 
 }
 
 function openDocumentation() {
-   var tabcontent = document.getElementById("wrapper");
+   var tabcontent = document.getElementById("homeWrapper");
    tabcontent.style.display = "none";
-//   tabcontent = document.getElementById("litterPerimeterId");
-//   tabcontent.style.display = "none";
    tabcontent = document.getElementById("map");
    tabcontent.style.display = "none";
    tabcontent = document.getElementById("survey_info");
+   tabcontent.style.display = "none";
+   tabcontent = document.getElementById("surveyInfoWrapper");
    tabcontent.style.display = "none";
    
    tabcontent = document.getElementById("documentation");

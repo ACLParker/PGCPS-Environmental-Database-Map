@@ -14,7 +14,7 @@ body, html {
   display: none;
 }
 
-#wrapper {
+#homeWrapper {
     width: 100%;
     overflow: hidden; /* will contain if #first is longer than #second */
 }
@@ -36,14 +36,20 @@ input[type="radio"]{
      height: 540px;
 }
  
-#litterPerimeterId {
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  padding-top: 25px;
+#areaCoveredId {
+  display: inline-grid;
+  padding: 5px;
+  padding-top: 12px;
 }
 
-
+#surveyInfoWrapper {
+    width: 100%;
+    overflow: hidden; /* will contain if #first is longer than #second */
+}
+#school_name_filters {
+    width: 36%;
+    float:left;
+}
 
 /* The following CSS Template was created by Jan Egil and Borges Refsnes */
 html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}

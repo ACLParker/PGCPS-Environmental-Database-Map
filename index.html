@@ -12,7 +12,7 @@
 </head>
 
 
-<body onload="loadMap(); updateDatabase(); populateEnvFeaturesDropDown(); openHome();">
+<body onload="loadMap(); updateDatabase(); populateEnvFeaturesDropDown(); populateSchoolNamesDropDown(); openHome();">
 
    <!-- Links (sit on top) -->
    <div class="top">
@@ -40,7 +40,7 @@
    <!-- Add a background color and large text to the whole page -->
    <div class="sand grayscale large">
 
-      <div id="wrapper">
+      <div id="homeWrapper">
          <div id="env_features_filters">
             <fieldset class="group">
                <legend>Environmental Features</legend>
@@ -72,9 +72,25 @@
                </div>
             </fieldset>
          </div>
-         <div id="litterPerimeterId"><button type="button" onclick="loadDataForLitterPerimeter();">Area Covered</button></div>
+         <div id="areaCoveredId">
+         	<button type="button" onclick="displayAreaCovered();">Area Covered</button>
+         	<button type="button" onclick="updateDatabase();">Update Database</button>
+         </div>
       </div>
      
+     <div id="surveyInfoWrapper">
+   		<div id="school_name_filters">
+            <fieldset class="group">
+               <legend>School Name</legend>
+               <div class="form-group">
+                  <select id="school_name_filters_drop_down" size="1"
+                     onchange="loadDataBySchoolName()">
+                     <option value="">None</option>
+                  </select>
+               </div>
+            </fieldset>
+         </div>
+	</div>
       
       <!-- Map Container -->
       <div class="container" id="map">
@@ -86,7 +102,8 @@
 
       <!-- Survey Info Container -->
       <div class="container">
-         <div class="content" id="survey_info" style="max-width: 50%" />
+         <div class="content" id="survey_info" style="max-width: 100%" />
+         <div id="surveyInfoContent"></div>         
       </div>
 
 
