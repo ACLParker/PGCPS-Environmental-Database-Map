@@ -314,9 +314,10 @@ function loadDataBySchoolName() {
 	
 	var myselect = document.getElementById("school_name_filters_drop_down");
 	var schoolName = myselect.options[myselect.selectedIndex].value;
-	   
+	console
 	var mydocumentation = document.getElementById("surveyInfoContent");
-	
+	mydocumentation.innerHTML = ""
+		
 	fetch('/getAllData?columnName=section1_school_name&value="' + schoolName + '"')   
 		.then(res => res.json())      
 		.then(res => {
