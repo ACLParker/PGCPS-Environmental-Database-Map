@@ -3,11 +3,11 @@ import pymysql
 import pymysql.cursors
 import sys
 
-#sys.argv[1]
 
 # Read ALL data from database and convert it to a JSON structure
-def convertDataToJson(mycursor):
-    query = "SELECT * FROM pgcps_environmental_info"
+def convertDataToJson(mycursor, columnName, value):    
+    query = "SELECT * FROM pgcps_environmental_info WHERE %s = '%s'" % (columnName, value)
+    print(query)
     mycursor.execute(query)
     result = mycursor.fetchall()
     
@@ -25,6 +25,8 @@ mydb = pymysql.connect(host='localhost',
                       charset='utf8mb4',
                       cursorclass=pymysql.cursors.DictCursor)
 mycursor = mydb.cursor()
-jsonValue = convertDataToJson(mycursor)
+columnName = sys.argv[1]
+value = sys.argv[2]
+jsonValue = convertDataToJson(mycursor, columnName, value)
 print(jsonValue)
 mydb.close()

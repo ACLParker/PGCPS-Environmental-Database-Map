@@ -12,7 +12,7 @@
 </head>
 
 
-<body onload="loadMap(); updateDatabase(); populateLitterTypeDropDown(); populateSchoolRatingsDropDown(); openHome();">
+<body onload="loadMap(); updateDatabase(); populateEnvFeaturesDropDown(); populateSchoolNamesDropDown(); openHome();">
 
    <!-- Links (sit on top) -->
    <div class="top">
@@ -21,7 +21,7 @@
             <a href="#" class="button block black" onclick="openHome()">HOME</a>
          </div>
          <div class="col s4">
-            <a href="#about" class="button block black" onclick="openAbout()">ABOUT</a>
+            <a href="#survey_info" class="button block black" onclick="openSurveyInfo()">SURVEY INFO</a>
          </div>
          <div class="col s4">
             <a href="#menu" class="button block black"
@@ -40,66 +40,57 @@
    <!-- Add a background color and large text to the whole page -->
    <div class="sand grayscale large">
 
-      <div id="wrapper">
-         <div id="litter_type_filters">
+      <div id="homeWrapper">
+         <div id="env_features_filters">
             <fieldset class="group">
-               <legend>Environmental Feature</legend>
+               <legend>Environmental Features</legend>
                <div class="form-group">
                   <select id="feature_filters_drop_down" size="1"
-                     onchange="loadDataByFeature()">
+                     onchange="displayMarkersByFeature()">
                      <option value="">None</option>
                   </select>
                </div>
             </fieldset>
-         </div>
+         </div>         
 
-<!-- 		<div id="school_name_filters"> -->
-<!--             <fieldset class="group"> -->
-<!--                <legend>School Name</legend> -->
-<!--                <div class="form-group"> -->
-<!--                   <select id="school_name_filters_drop_down" size="1" -->
-<!--                      onchange="loadDataBySchoolName()"> -->
-<!--                      <option value="">None</option> -->
-<!--                      <option value="all">All</option> -->
-<!--                   </select> -->
-<!--                </div> -->
-<!--             </fieldset> -->
-<!--          </div> -->
-         
-		<div id="school_ratings_filters">
+         <div id="school_ratings_filters">
             <fieldset class="group">
-               <legend>School Environmental Ratings</legend>
+               <legend>School Ratings</legend>
                <div class="form-group">
-                  <select id="school_ratings_filters_drop_down" size="1"
-                     onchange="loadDataBySchoolRatings()">
-                     <option value="">None</option>
-                     <option value="all">All</option>
-                     <option value="wcapp">Water Conservation and Pollution Prevention</option>
-                     <option value="ec">Energy Conservation</option>
-                     <option value="hrasfel">Habitat Restoration and Structures for Environmental Learning</option>
-                     <option value="rtahse">Responsible Transportation and Healthy School Environment</option>
-                  </select>
+                  <input type="radio" name="filter" value="srf_all"
+                     onclick="displayMarkersBySectionRanking('srf_all');" /><label data-toggle="tooltip" data-placement="bottom" title="Include all sections">All</label>
+                  <input type="radio" name="filter" value="srf_section1"
+                     onclick="displayMarkersBySectionRanking('srf_section1');" /><label data-toggle="tooltip" data-placement="bottom" title="General, Garden, Recycling, Composting">Section 1</label>
+                  <input type="radio" name="filter" value="srf_section2"
+                    onclick="displayMarkersBySectionRanking('srf_section2');" /><label data-toggle="tooltip" data-placement="bottom" title="Water Conservation and Pollution Prevention">Section 2</label>
+                    <input type="radio" name="filter" value="srf_section3"
+                    onclick="displayMarkersBySectionRanking('srf_section3');" /><label data-toggle="tooltip" data-placement="bottom" title="Energy Conservation">Section 3</label>
+                    <input type="radio" name="filter" value="srf_section4"
+                    onclick="displayMarkersBySectionRanking('srf_section4');" /><label data-toggle="tooltip" data-placement="bottom" title="Habitat Restoration and Structures for Environmental Learning">Section 4</label>
+                    <input type="radio" name="filter" value="srf_section5"
+                    onclick="displayMarkersBySectionRanking('srf_section5');" /><label data-toggle="tooltip" data-placement="bottom" title="Responsible Transportation and Healthy School Environment">Section 5</label>                    
                </div>
             </fieldset>
          </div>
-         
-
-         <div id="total_litter_filters">
-            <fieldset class="group">
-               <legend>Total Litter</legend>
-               <div class="form-group">
-                  <input type="radio" name="filter" value="tlf_all"
-                     onclick="loadDataByTotalLitter('all');" /><label>All</label>
-                  <input type="radio" name="filter" value="tlf_bags"
-                     onclick="loadDataByTotalLitter('number_bags');" /><label>Bags</label>
-                  <input type="radio" name="filter" value="tlf_tires"
-                     onclick="loadDataByTotalLitter('total_tires');" /><label>Tires</label>
-               </div>
-            </fieldset>
+         <div id="areaCoveredId">
+         	<button type="button" onclick="displayAreaCovered();">Area Covered</button>
+         	<button type="button" onclick="updateDatabase();">Update Database</button>
          </div>
       </div>
-
-      <div id="litterPerimeterId"><button type="button" onclick="loadDataForLitterPerimeter();">Litter Perimeter</button></div>
+     
+     <div id="surveyInfoWrapper">
+   		<div id="school_name_filters">
+            <fieldset class="group">
+               <legend>School Name</legend>
+               <div class="form-group">
+                  <select id="school_name_filters_drop_down" size="1"
+                     onchange="loadDataBySchoolName()">
+                     <option value="">None</option>
+                  </select>
+               </div>
+            </fieldset>
+         </div>
+	</div>
       
       <!-- Map Container -->
       <div class="container" id="map">
@@ -109,9 +100,10 @@
       </div>
 
 
-      <!-- About Container -->
+      <!-- Survey Info Container -->
       <div class="container">
-         <div class="content" id="about" style="max-width: 50%" />
+         <div class="content" id="survey_info" style="max-width: 100%" />
+         <div id="surveyInfoContent"></div>         
       </div>
 
 

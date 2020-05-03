@@ -1,9 +1,8 @@
-const m = new Map([['color', 'red'], ['owner', 'Flavio'], ['age', 2]])
 
 const JSON_KEY_TO_OPTION_NAMES = new Map([
-    ["section1_time_stamp", ["Section 1: Time Stamp", "NA"]],
-    ["section1_email", ["Section 1: Email", "NA"]],
-    ["section1_school_name", ["Section 1: School Name", "NA"]],
+    ["section1_time_stamp", ["Section 1: Time Stamp", ""]],
+    ["section1_email", ["Section 1: Email", ""]],
+    ["section1_school_name", ["Section 1: School Name", ""]],
     ["section1_green_school_certification", ["Section 1: Green School Certification", "Displays schools that are certified"]],
     ["section1_active_garden_vegetable_garden", ["Section 1: Active Gardens: Vegetable Garden", "Displays schools that have a vegetable garden"]],
     ["section1_active_garden_native_garden", ["Section 1: Active Gardens: Native Garden", "Displays schools that have a native garden"]],
@@ -87,8 +86,8 @@ const JSON_KEY_TO_OPTION_NAMES = new Map([
     ["section5_grow_donate_eat_garden", ["Section 5: Grow/Donate Eat Food in Garden", "Displays schools that grow, donate, or eat from school garden"]],
     ["section5_green_cleaning_products", ["Section 5: Green Cleaning Products", "Displays schools that utilize green cleaning products"]],
     ["section5_community_science_program", ["Section 5: Community Science Program", "Displays schools that participate in one or more community science programs"]],
-    ["section6_enviro_awards", ["Section 6: Environmental Awards", "NA"]],
-    ["section6_actions_not_mentioned", ["Section 6: Actions Not Mentioned", "NA"]],
+    ["section6_enviro_awards", ["Section 6: Environmental Awards", ""]],
+    ["section6_actions_not_mentioned", ["Section 6: Actions Not Mentioned", ""]],
     ["latitude", ["Latitude", "Latitude coordinate for school"]],
     ["longitude", ["Longitude", "Longitude coordinate for school"]]
 ]);
@@ -117,80 +116,38 @@ function updateDatabase() {
 		});
 }
 
-function populateLitterTypeDropDown() {
-   console.log("Populating Litter Type drop-down list.");
-   fetch('/getAllData')
-    .then(res => res.json())   
-   	.then(res => {   		
-     var features = new Set(); // Prevents adding duplicate entries
-	   for(var key in res[0]) {
-		   if(!key.endsWith("_comments") && !key.endsWith("section1_time_stamp") && 
-			   !key.endsWith("section1_school_name") && !key.endsWith("section1_email") &&
-			   !key.endsWith("school_id") && !key.endsWith("enviro_lit_rating") &&				   
-			   !key.endsWith("section6_enviro_awards") && !key.endsWith("section6_actions_not_mentioned") && 
-			   !key.endsWith("latitude") && !key.endsWith("longitude")) {
-			   features.add(key);
-		   }
+function populateEnvFeaturesDropDown() {
+   console.log("Populating Environmental Features drop-down list.");
+   
+   // Add the options to the drop-down and build the documentation page
+   var myselect = document.getElementById("feature_filters_drop_down");
+   for (let feature of JSON_KEY_TO_OPTION_NAMES) {
+	   let key = feature[0];
+	   let text = feature[1][0];
+	   if(!key.endsWith("_comments") && !key.startsWith("section1_time_stamp") && 
+		   !key.startsWith("section1_school_name") && !key.startsWith("section1_email") &&			   				   
+		   !key.startsWith("section6_enviro_awards") && !key.startsWith("section6_actions_not_mentioned") && 
+		   !key.startsWith("latitude") && !key.startsWith("longitude")) {
+		   let opt = document.createElement('option');
+		   opt.appendChild(document.createTextNode(text));
+		   // set value property of opt
+		   opt.value = key;
+		   // add option to the end of select box
+		   myselect.appendChild(opt);
 	   }
-	   
-     // Add the options to the drop-down and build the documentation page
-     var myselect = document.getElementById("feature_filters_drop_down");
-     for (let feature of features) {
-        let opt = document.createElement('option');
-        opt.appendChild(document.createTextNode(JSON_KEY_TO_OPTION_NAMES.get(feature)));
-        // set value property of opt
-        opt.value = feature; 
-        // add option to the end of select box
-        myselect.appendChild(opt); 
-     }
-      return features;
-   })
-   .then(res => {
-      console.log(res);
-      return res;
-    });
+   }
 }
 
-function populateSchoolRatingsDropDown() {
-	   console.log("Populating School Name drop-down list.");
-
-	   //fetch('http://localhost/PGCPS_Enviro_Info.json')
-//	   fetch('http://localhost/test.json')
-//	   .then(res => res.json())   
-//	   .then(res => {
-//		   var schoolNames = new Set(); // Prevents adding duplicate entries
-//		   for(var index = 0; index < res.length; index++) {
-//			   schoolNames.add(res[index]['school_name']);
-//		   }
-//		   
-//	     // Add the options to the drop-down and build the documentation page
-//	     var myselect = document.getElementById("school_name_filters_drop_down");
-//	     for (let name of schoolNames) {
-//	        let opt = document.createElement('option');
-//	        opt.appendChild(document.createTextNode(name));
-//	        // set value property of opt
-//	        opt.value = name; 
-//	        // add option to the end of select box
-//	        myselect.appendChild(opt); 
-//	     }
-//	      return schoolNames;
-//	   })
-//	   .then(res => {
-//	      console.log(res);
-//	      return res;
-//	    }); 
-	}
-
-function populateSchoolNameDropDown() {
+function populateSchoolNamesDropDown() {
    console.log("Populating School Name drop-down list.");
 
-   //fetch('http://localhost/PGCPS_Enviro_Info.json')
+   // fetch('http://localhost/PGCPS_Enviro_Info.json')
    fetch('/getAllData')
    .then(res => res.json())   
    .then(res => {
 	   var schoolNames = new Set(); // Prevents adding duplicate entries
 	   for(var index = 0; index < res.length; index++) {
-		   schoolNames.add(res[index]['school_name']);
+		   schoolNames.add(res[index]['section1_school_name']);
 	   }
 	   
      // Add the options to the drop-down and build the documentation page
@@ -204,29 +161,19 @@ function populateSchoolNameDropDown() {
         myselect.appendChild(opt); 
      }
       return schoolNames;
-   })
-   .then(res => {
-      console.log(res);
-      return res;
-    }); 
+   }); 
 }
 
-function loadDataByFeature() {
+function displayMarkersByFeature() {
    var myselect = document.getElementById("feature_filters_drop_down");
-   var feature = myselect.options[myselect.selectedIndex].value;
-   var index = feature.indexOf(": ");   
+   var feature = myselect.options[myselect.selectedIndex].value;   
    
-   if(index != -1) {
-	   subFeature = feature.substring(index + 2);
-	   feature = feature.substring(0, index);
-   } 
-   
-   console.log("Filtering for Litter Type: " + feature);
+   console.log("Displaying markers for: " + feature);
    
    // NOTE: The first thing we do here is clear the markers from the layer.
    markersLayer.clearLayers();
    
-   fetch('/getAllData')   
+   fetch('/getAllData?columnName=' + feature + "&value=Yes")   
       .then(res => res.json())      
       .then(res => {
     	  for(var index = 0; index < res.length; index++) {
@@ -234,13 +181,12 @@ function loadDataByFeature() {
     		  var longitude = res[index].longitude;    		  
     		  
     		  if(feature.toLowerCase().length > 0) {
-		          if((subFeature.length == 0 && res[index][feature].toLowerCase() == "yes") || 
-		        		  (subFeature.length != 0 && res[index][feature][subFeature].toLowerCase() == "yes")) {
+		          if(res[index][feature].toLowerCase() == "yes") {
 			          // Create a marker
 			          var marker = L.marker([latitude, longitude]);
 			          // Add a popup to the marker
 			          marker.bindPopup(
-			                "<b>" + res[index]['school_name'] + "</b><br>"
+			                "<b>" + res[index]['section1_school_name'] + "</b><br>"
 			          ).openPopup();
 			          // Add marker to the layer. Not displayed yet.
 			          markersLayer.addLayer(marker);
@@ -250,50 +196,6 @@ function loadDataByFeature() {
 	     // Display all the markers.
 	     markersLayer.addTo(mymap);
 	     return res;
-      })
-      .then(res => {
-    	  console.log(res);
-    	  return res;
-      });      
-}
-
-function loadDataBySchoolName() {
-   var myselect = document.getElementById("school_name_filters_drop_down");
-   var schoolName = myselect.options[myselect.selectedIndex].value;
-   
-   console.log("Filtering for School Name: " + schoolName);
-   
-   // NOTE: The first thing we do here is clear the markers from the layer.
-   markersLayer.clearLayers();
-   
-   //fetch('/api')
-   fetch('http://localhost/test.json')
-      .then(res => res.json())      
-      .then(res => {
-    	  for(var index = 0; index < res.length; index++) {
-    		  var latitude = res[index].latitude;
-    		  var longitude = res[index].longitude;    		  
-    		  
-    		  if(schoolName.toLowerCase().length > 0) {
-		          if(schoolName == "all" || res[index]['school_name'] == schoolName) {
-			          // Create a marker
-			          var marker = L.marker([latitude, longitude]);
-			          // Add a popup to the marker
-			          marker.bindPopup(
-			                "<b>" + res[index]['school_name'] + "</b><br>"
-			          ).openPopup();
-			          // Add marker to the layer. Not displayed yet.
-			          markersLayer.addLayer(marker);
-			       }
-    		  }
-	     }
-	     // Display all the markers.
-	     markersLayer.addTo(mymap);
-	     return res;
-      })
-      .then(res => {
-    	  console.log(res);
-    	  return res;
       });      
 }
 
@@ -306,7 +208,7 @@ function loadDataBySchoolRatings() {
    // NOTE: The first thing we do here is clear the markers from the layer.
    markersLayer.clearLayers();
    
-   //fetch('/api')
+   // fetch('/api')
    fetch('http://localhost/test.json')
       .then(res => res.json())      
       .then(res => {
@@ -330,24 +232,6 @@ function loadDataBySchoolRatings() {
                    
                    // Add marker to the layer. Not displayed yet.
                    markersLayer.addLayer(circle);
-    			  
-    			  
-    			  
-    			  
-    			  
-    			  
-    			  
-    			  
-		          if(schoolName == "all" || res[index]['school_name'] == schoolName) {
-			          // Create a marker
-			          var marker = L.marker([latitude, longitude]);
-			          // Add a popup to the marker
-			          marker.bindPopup(
-			                "<b>" + res[index]['school_name'] + "</b><br>"
-			          ).openPopup();
-			          // Add marker to the layer. Not displayed yet.
-			          markersLayer.addLayer(marker);
-			       }
     		  }
 	     }
 	     // Display all the markers.
@@ -360,122 +244,143 @@ function loadDataBySchoolRatings() {
       });      
 }
 
-function loadDataByTotalLitter(totalLitterType) {
-   console.log("Filtering for Total Bags Litter: " + totalLitterType);
+function countYesForSection(schoolData, section) {
+	var counter = 0;
+	Object.entries(schoolData).forEach(([key, value]) => {
+		if(typeof value === 'string' && value.toLowerCase() === "yes") {
+			switch(section) {
+			case "srf_all":
+				counter++;
+				break;
+			case "srf_section1":
+				if(key.startsWith("section1_")) counter++;
+				break;
+			case "srf_section2":
+				if(key.startsWith("section2_")) counter++;
+				break;
+			case "srf_section3":
+				if(key.startsWith("section3_")) counter++;
+				break;
+			case "srf_section4":
+				if(key.startsWith("section4_")) counter++;
+				break;
+			case "srf_section5":
+				if(key.startsWith("section5_")) counter++;
+				break;
+			}
+		}
+	});	
+	return counter;
+}
+
+function displayMarkersBySectionRanking(section) {
+   console.log("Displaying markers for school ranking section: " + section);
    
    // NOTE: The first thing we do here is clear the markers from the layer.
    markersLayer.clearLayers();
    
-   fetch('/api')
+   fetch('/getAllData')
       .then(res => res.json())      
       .then(res => {
-         var data = res.data;
-         for(var index = 0; index < data.length; index++) {
-            var circle;
-            var latitude = data[index].latitude;
-            var longitude = data[index].longitude;
-            
-            if(totalLitterType == 'number_bags' || totalLitterType == 'all') {
-               if(data[index].number_bags > 0) {
-                  circle = L.circle([longitude, latitude], {
-                     color: 'red',
-                     fillColor: '#f03',
-                     fillOpacity: 0.5,
-                     radius: data[index].number_bags * 50
-                  });
-                  
-                  // Add a popup to the circle
-                  circle.bindPopup(
-                        "<b>" + data[index].organization + "</b><br>" +
-                        "Total Bags: " + data[index].number_bags
-                  ).openPopup();
-                  
-                  // Add marker to the layer. Not displayed yet.
-                  markersLayer.addLayer(circle);
-               }
-            } 
-            
-            if(totalLitterType == 'total_tires' || totalLitterType == 'all') {
-               if(data[index].total_tires > 0) {
-                  circle = L.circle([longitude, latitude], {
-                     color: 'blue',
-                     fillColor: '#00f',
-                     fillOpacity: 0.5,
-                     radius: data[index].total_tires * 50
-                  });
-                  
-                  // Add a popup to the circle
-                  circle.bindPopup(
-                        "<b>" + data[index].organization + "</b><br>" +
-                        "Total Tires: " + data[index].total_tires
-                  ).openPopup();
-                  
-                  // Add marker to the layer. Not displayed yet.
-                  markersLayer.addLayer(circle);
-               }
-            }
+         for(var index = 0; index < res.length; index++) {
+        	 let numberYes = countYesForSection(res[index], section);        	 
+        	 let latitude = res[index].latitude;
+        	 let longitude = res[index].longitude;
+
+             let circle = L.circle([latitude, longitude], {
+            	 color: 'red',
+                 fillColor: '#f03',
+                 fillOpacity: 0.5,
+                 radius: numberYes * (section === 'srf_all' ? 50 : 100)
+             });
+              
+             // Add a popup to the circle
+             circle.bindPopup(
+                    "<b>" + res[index].section1_school_name + "</b><br>" +
+                    "Total Yes: " + numberYes
+             ).openPopup();
+              
+             // Add marker to the layer. Not displayed yet.
+             markersLayer.addLayer(circle);             
          }
          // Display all the markers.
          markersLayer.addTo(mymap);
-         return data;
-      })
-      .then(res => {
-    	  console.log(res);
-    	  return res;
+         return res;
       });
 }
 
-function populateLitterTypeDocumentation() {
-   console.log("Populating Litter Type documentation.");
-
-   fetch('/getAllData')
-   .then(res => res.json())
-   .then(res => {
-      var litterTypes = new Set(); // Prevents adding duplicate entries
-      for(let index = 0; index < res.length; index++) {                  
-            litterTypes.add(data[index].type_litter.toLowerCase());
-         }
-      }
-      
-      var mydocumentation = document.getElementById("Type of Litter");
-      for (let litterType of litterTypes) {
-
-         let heading = document.createElement("h5");
-         let text = document.createTextNode(litterType);
-         heading.appendChild(text);
-         mydocumentation.appendChild(heading);
-         
-         let para = document.createElement("p");
-         para.className += "text-grey";
-         text = document.createTextNode("Represents " + litterType + " litter");
-         para.appendChild(text);
-         mydocumentation.appendChild(para);
-         
-         let mybreak = document.createElement("br");
-         mydocumentation.appendChild(mybreak);
-      }
-      return litterTypes;
-   })
-   .then(res => {
-      console.log(res);
-      return res;
-    }); 
+function loadDataBySchoolName() {
+	console.log("Loading survey data for school.");
+	
+	var myselect = document.getElementById("school_name_filters_drop_down");
+	var schoolName = myselect.options[myselect.selectedIndex].value;
+	   
+	var mydocumentation = document.getElementById("surveyInfoContent");
+	
+	fetch('/getAllData?columnName=section1_school_name&value="' + schoolName + '"')   
+		.then(res => res.json())      
+		.then(res => {
+	    	Object.entries(res[0]).forEach(([key, value]) => {		
+	    		let name = JSON_KEY_TO_OPTION_NAMES.get(key)[0];
+	    		let heading = document.createElement("h5");
+	    		let text = document.createTextNode(name);
+	    		heading.appendChild(text);
+	    		mydocumentation.appendChild(heading);
+	     
+	    		let para = document.createElement("p");
+	    		para.className += "text-grey";
+	    		text = document.createTextNode(value);
+	    		para.appendChild(text);
+	    		mydocumentation.appendChild(para);
+	     
+	    		let mybreak = document.createElement("br");
+	    		mydocumentation.appendChild(mybreak);
+	    	});
+    });
 }
 
-function loadDataForLitterPerimeter() {
-   fetch('/api')
+function populateEnvFeaturesDocumentation() {
+	console.log("Populating Environmental Features documentation.");
+   
+	var mydocumentation = document.getElementById("EnvFeatures");	
+	for (let feature of JSON_KEY_TO_OPTION_NAMES) {
+		let key = feature[0];
+		if(!key.endsWith("_comments") && !key.startsWith("section1_time_stamp") && 
+		   !key.startsWith("section1_school_name") && !key.startsWith("section1_email") &&			   				   
+		   !key.startsWith("section6_enviro_awards") && !key.startsWith("section6_actions_not_mentioned") && 
+		   !key.startsWith("latitude") && !key.startsWith("longitude")) {
+			let columnName = feature[1][0];
+			let description = feature[1][1]
+			let heading = document.createElement("h5");
+			let text = document.createTextNode(columnName);
+			heading.appendChild(text);
+			mydocumentation.appendChild(heading);
+	 
+			let para = document.createElement("p");
+			para.className += "text-grey";
+			text = document.createTextNode(description);
+			para.appendChild(text);
+			mydocumentation.appendChild(para);
+	 
+			let mybreak = document.createElement("br");
+			mydocumentation.appendChild(mybreak);
+		}
+	}
+}
+
+function displayAreaCovered() {
+   fetch('/getAllData')
    .then(res => res.json())  
    .then(res => {
-      var data = res.data;
       // Initialize all points to the center of Prince George's County
-      var northPoint = {longitude: 38.8162729, latitude: -76.7523043};
-      var southPoint = {longitude: 38.8162729, latitude: -76.7523043};
-      var westPoint = {longitude: 38.8162729, latitude: -76.7523043};
-      var eastPoint = {longitude: 38.8162729, latitude: -76.7523043};
+      var northPoint = {latitude: 38.8162729, longitude: -76.7523043};
+      var southPoint = {latitude: 38.8162729, longitude: -76.7523043};
+      var westPoint = {latitude: 38.8162729, longitude: -76.7523043};
+      var eastPoint = {latitude: 38.8162729, longitude: -76.7523043};
       
-      for(let index = 0; index < data.length; index++) {         
-         var latitude = data[index].latitude;
-         var longitude = data[index].longitude;
+      for(let index = 0; index < res.length; index++) {         
+         var latitude = res[index].latitude;
+         var longitude = res[index].longitude;
          
          // Find the highest point to the north
          if(longitude > northPoint.longitude) {
@@ -499,10 +404,10 @@ function loadDataForLitterPerimeter() {
          }
       }
       var polygon = L.polygon([
-         [northPoint.longitude, northPoint.latitude],
-         [eastPoint.longitude, eastPoint.latitude],
-         [southPoint.longitude, southPoint.latitude],         
-         [westPoint.longitude, westPoint.latitude]
+         [northPoint.latitude, northPoint.longitude],
+         [eastPoint.latitude, eastPoint.longitude],
+         [southPoint.latitude, southPoint.longitude],         
+         [westPoint.latitude, westPoint.longitude]
          ]);
      markersLayer.addLayer(polygon);
      // Display all the markers.
@@ -511,37 +416,43 @@ function loadDataForLitterPerimeter() {
 }
 
 function openHome() {
-   var tabcontent = document.getElementById("about");   
+   var tabcontent = document.getElementById("survey_info");   
+   tabcontent.style.display = "none";
+   tabcontent = document.getElementById("surveyInfoWrapper");
    tabcontent.style.display = "none";
    tabcontent = document.getElementById("documentation");
-   tabcontent.style.display = "none";
+   tabcontent.style.display = "none";   
    
-   tabcontent = document.getElementById("wrapper");
+   tabcontent = document.getElementById("homeWrapper");
    tabcontent.style.display = "block";
    tabcontent = document.getElementById("map");
    tabcontent.style.display = "block";
 }
 
-function openAbout() {
-   var tabcontent = document.getElementById("wrapper");
+function openSurveyInfo() {
+   var tabcontent = document.getElementById("homeWrapper");
    tabcontent.style.display = "none";
    tabcontent = document.getElementById("map");
    tabcontent.style.display = "none";   
    tabcontent = document.getElementById("documentation");
    tabcontent.style.display = "none";
    
-   tabcontent = document.getElementById("about");
+   tabcontent = document.getElementById("survey_info");
+   tabcontent.style.display = "block";
+   tabcontent = document.getElementById("surveyInfoWrapper");
    tabcontent.style.display = "block";
    
-   loadAboutPage(); 
+   //loadSurveyInfoPage(); 
 }
 
 function openDocumentation() {
-   var tabcontent = document.getElementById("wrapper");
+   var tabcontent = document.getElementById("homeWrapper");
    tabcontent.style.display = "none";
    tabcontent = document.getElementById("map");
    tabcontent.style.display = "none";
-   tabcontent = document.getElementById("about");
+   tabcontent = document.getElementById("survey_info");
+   tabcontent.style.display = "none";
+   tabcontent = document.getElementById("surveyInfoWrapper");
    tabcontent.style.display = "none";
    
    tabcontent = document.getElementById("documentation");
@@ -550,8 +461,8 @@ function openDocumentation() {
    loadDocumentationPage();
 }
 
-function loadAboutPage() {
-   document.getElementById("about").innerHTML='<object type="text/html" data="about.html" width="100%"></object>';   
+function loadSurveyInfoPage() {
+   document.getElementById("survey_info").innerHTML='<object type="text/html" data="survey_info.html" width="100%"></object>';   
 }
 
 function loadDocumentationPage() {
