@@ -163,7 +163,20 @@ function populateSchoolNamesDropDown() {
    }); 
 }
 
+function clearSchoolRatingsSelection() {
+	var rbList = document.getElementsByName("filter");
+    for (var i = 0; i < rbList.length; i++) {
+    	if(rbList[i].checked) { 
+    		let rb = document.getElementById(rbList[i].id);
+    		rb.checked = false;
+    	}
+    }
+}
+
 function displayMarkersByFeature() {
+	// Uncheck school rating radio buttons
+	clearSchoolRatingsSelection()
+    
    var myselect = document.getElementById("feature_filters_drop_down");
    var feature = myselect.options[myselect.selectedIndex].value;   
    
@@ -227,8 +240,8 @@ function countYesForSection(schoolData, section) {
 	return counter;
 }
 
-function displayMarkersBySectionRanking(section) {
-   console.log("Displaying markers for school ranking section: " + section);
+function displayMarkersBySectionRating(section) {
+   console.log("Displaying markers for school rating section: " + section);
    
    // NOTE: The first thing we do here is clear the markers from the layer.
    markersLayer.clearLayers();
@@ -277,19 +290,19 @@ function loadDataBySchoolName() {
 		.then(res => {
 	    	Object.entries(res[0]).forEach(([key, value]) => {		
 	    		let name = JSON_KEY_TO_OPTION_NAMES.get(key)[0];
-	    		let heading = document.createElement("h5");
-	    		let text = document.createTextNode(name);
+	    		let heading = document.createElement("p");
+	    		let text = document.createTextNode(name + " - " + value);
 	    		heading.appendChild(text);
 	    		mydocumentation.appendChild(heading);
 	     
-	    		let para = document.createElement("p");
-	    		para.className += "text-grey";
-	    		text = document.createTextNode(value);
-	    		para.appendChild(text);
-	    		mydocumentation.appendChild(para);
+//	    		let para = document.createElement("p");
+//	    		para.className += "text-grey";
+//	    		text = document.createTextNode(value);
+//	    		para.appendChild(text);
+//	    		mydocumentation.appendChild(para);
 	     
-	    		let mybreak = document.createElement("br");
-	    		mydocumentation.appendChild(mybreak);
+//	    		let mybreak = document.createElement("br");
+//	    		mydocumentation.appendChild(mybreak);
 	    	});
     });
 }
