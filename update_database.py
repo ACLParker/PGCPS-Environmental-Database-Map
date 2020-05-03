@@ -209,6 +209,10 @@ def getValuesFromGoogle():
     
 # Function to delete previous table and create a new one
 def createDatabaseTable(mycursor):
+    sql = "CREATE DATABASE IF NOT EXISTS pgcps_environmental_lit"
+    mycursor.execute(sql)
+    sql = "USE pgcps_environmental_lit"
+    mycursor.execute(sql)
     # Drop the previous database table if one exists
     sql = "DROP TABLE IF EXISTS pgcps_environmental_info"
     mycursor.execute(sql)
@@ -299,7 +303,6 @@ rowValues = getValuesFromGoogle()
 mydb = pymysql.connect(host='localhost',
                       user='root',
                       password='Inst#490',
-                      db='pgcps_environmental_lit',
                       charset='utf8mb4',
                       cursorclass=pymysql.cursors.DictCursor)
 mycursor = mydb.cursor()
