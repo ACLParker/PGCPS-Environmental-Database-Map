@@ -38,4 +38,4 @@
   </ol>
 <h1>Any expectations around known bugs and road-map for future development </h1>
   <p>There are no known bugs right now. Future development would spread our map to other counties, which may cause a bug
-  if the map becomes too large. It would be bad if the map was so big that the user could not distinguish any of the litter points. </p>
+  if the map becomes too large. It would be bad if the map was so big that the user could not distinguish any of the school points. </p>

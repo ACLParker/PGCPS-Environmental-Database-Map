@@ -327,43 +327,28 @@ function displayAreaCovered() {
    fetch('/getAllData')
    .then(res => res.json())  
    .then(res => {
-      // Initialize all points to the center of Prince George's County
-      var northPoint = {latitude: 38.8162729, longitude: -76.7523043};
-      var southPoint = {latitude: 38.8162729, longitude: -76.7523043};
-      var westPoint = {latitude: 38.8162729, longitude: -76.7523043};
-      var eastPoint = {latitude: 38.8162729, longitude: -76.7523043};
-      
-      for(let index = 0; index < res.length; index++) {         
-         var latitude = res[index].latitude;
-         var longitude = res[index].longitude;
-         
-         // Find the highest point to the north
-         if(longitude > northPoint.longitude) {
-            northPoint.longitude = longitude;
-            northPoint.latitude = latitude;
-         }
-         // Find the lowest point to the south
-         if(longitude < southPoint.longitude) {
-            southPoint.longitude = longitude;
-            southPoint.latitude = latitude;
-         }
-         // Find the highest point to the right
-         if(latitude > eastPoint.latitude) {
-            eastPoint.longitude = longitude;
-            eastPoint.latitude = latitude;
-         }
-         // Find the lowest point to the left
-         if(latitude < westPoint.latitude) {
-            westPoint.longitude = longitude;
-            westPoint.latitude = latitude;
-         }
-      }
+      // Used PG County Atlas to get most of the coordinates.  https://www.pgatlas.com/
       var polygon = L.polygon([
-         [northPoint.latitude, northPoint.longitude],
-         [eastPoint.latitude, eastPoint.longitude],
-         [southPoint.latitude, southPoint.longitude],         
-         [westPoint.latitude, westPoint.longitude]
+    	  [39.1297476, -76.8878470],
+    	  [38.9658582, -77.0028848],
+    	  [38.8924100, -76.9101263],
+    	  [38.8040671, -77.0223920],
+    	  [38.7084377, -77.0373222],
+    	  [38.6892932, -77.0766706],
+    	  [38.6165086, -77.0482834],
+    	  [38.6603210, -76.9853651],
+    	  [38.6516428, -76.9011842],
+    	  [38.6608615, -76.8657629],
+    	  [38.6168659, -76.7494621],
+    	  [38.5582369, -76.7410240],
+    	  [38.5401970, -76.6813885],
+    	  [38.7833602, -76.7141972],
+    	  [38.9053952, -76.6694931],
+    	  [38.9900079, -76.7046728],
+    	  [39.0766305, -76.8341119],
+    	  [39.1025425, -76.8356350] 
          ]);
+      
      markersLayer.addLayer(polygon);
      // Display all the markers.
      markersLayer.addTo(mymap);

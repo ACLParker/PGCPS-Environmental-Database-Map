@@ -41,18 +41,6 @@
    <div class="sand grayscale large">
 
       <div id="homeWrapper">
-         <div id="env_features_filters">
-            <fieldset class="group">
-               <legend>Environmental Features</legend>
-               <div class="form-group">
-                  <select id="feature_filters_drop_down" size="1"
-                     onchange="displayMarkersByFeature()">
-                     <option value="">None</option>
-                  </select>
-               </div>
-            </fieldset>
-         </div>         
-
          <div id="school_ratings_filters">
             <fieldset class="group">
                <legend>School Ratings</legend>
@@ -72,6 +60,19 @@
                </div>
             </fieldset>
          </div>
+         
+         <div id="env_features_filters">
+            <fieldset class="group">
+               <legend>Environmental Features</legend>
+               <div class="form-group">
+                  <select id="feature_filters_drop_down" size="1"
+                     onchange="displayMarkersByFeature()">
+                     <option value="">None</option>
+                  </select>
+               </div>
+            </fieldset>
+         </div>         
+
          <div id="areaCoveredId">
          	<button type="button" onclick="displayAreaCovered();">Area Covered</button>
          	<button type="button" onclick="updateDatabase();">Update Database</button>
