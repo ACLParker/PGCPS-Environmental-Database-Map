@@ -141,7 +141,6 @@ function populateEnvFeaturesDropDown() {
 function populateSchoolNamesDropDown() {
    console.log("Populating School Name drop-down list.");
 
-   // fetch('http://localhost/PGCPS_Enviro_Info.json')
    fetch('/getAllData')
    .then(res => res.json())   
    .then(res => {
@@ -173,7 +172,7 @@ function displayMarkersByFeature() {
    // NOTE: The first thing we do here is clear the markers from the layer.
    markersLayer.clearLayers();
    
-   fetch('/getAllData?columnName=' + feature + "&value=Yes")   
+   fetch('/getDataByColumnName?columnName=' + feature + "&value=Yes")   
       .then(res => res.json())      
       .then(res => {
     	  for(var index = 0; index < res.length; index++) {
@@ -196,51 +195,6 @@ function displayMarkersByFeature() {
 	     // Display all the markers.
 	     markersLayer.addTo(mymap);
 	     return res;
-      });      
-}
-
-function loadDataBySchoolRatings() {
-   var myselect = document.getElementById("school_ratings_filters_drop_down");
-   var ratingSection = myselect.options[myselect.selectedIndex].value;
-   
-   console.log("Filtering for School Rating By: " + ratingSection);
-   
-   // NOTE: The first thing we do here is clear the markers from the layer.
-   markersLayer.clearLayers();
-   
-   // fetch('/api')
-   fetch('http://localhost/test.json')
-      .then(res => res.json())      
-      .then(res => {
-    	  for(var index = 0; index < res.length; index++) {
-    		  var latitude = res[index].latitude;
-    		  var longitude = res[index].longitude;    		  
-    		  
-    		  if(schoolName.toLowerCase().length > 0) {
-    			  circle = L.circle([latitude, longitude], {
-                      color: 'red',
-                      fillColor: '#f03',
-                      fillOpacity: 0.5,
-                      radius: data[index].number_bags * 50
-                   });
-                   
-                   // Add a popup to the circle
-                   circle.bindPopup(
-                         "<b>" + data[index].organization + "</b><br>" +
-                         "Total Bags: " + data[index].number_bags
-                   ).openPopup();
-                   
-                   // Add marker to the layer. Not displayed yet.
-                   markersLayer.addLayer(circle);
-    		  }
-	     }
-	     // Display all the markers.
-	     markersLayer.addTo(mymap);
-	     return res;
-      })
-      .then(res => {
-    	  console.log(res);
-    	  return res;
       });      
 }
 
@@ -314,11 +268,11 @@ function loadDataBySchoolName() {
 	
 	var myselect = document.getElementById("school_name_filters_drop_down");
 	var schoolName = myselect.options[myselect.selectedIndex].value;
-	console
+
 	var mydocumentation = document.getElementById("surveyInfoContent");
 	mydocumentation.innerHTML = ""
 		
-	fetch('/getAllData?columnName=section1_school_name&value="' + schoolName + '"')   
+	fetch('/getDataByColumnName?columnName=section1_school_name&value=' + schoolName)   
 		.then(res => res.json())      
 		.then(res => {
 	    	Object.entries(res[0]).forEach(([key, value]) => {		

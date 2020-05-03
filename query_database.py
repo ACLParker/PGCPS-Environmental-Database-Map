@@ -6,8 +6,7 @@ import sys
 
 # Read ALL data from database and convert it to a JSON structure
 def convertDataToJson(mycursor, columnName, value):    
-    query = "SELECT * FROM pgcps_environmental_info WHERE %s = '%s'" % (columnName, value)
-    print(query)
+    query = "SELECT * FROM pgcps_environmental_info WHERE %s like '%s'" % (columnName, value)
     mycursor.execute(query)
     result = mycursor.fetchall()
     

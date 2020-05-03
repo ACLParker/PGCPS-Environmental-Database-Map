@@ -14,7 +14,7 @@ app.listen(port, () => console.log(`Server app listening on port ${port}!`));
  
 // API to update the local database with Google data
 app.get('/updateDatabase', (req, res) => {
-	console.log("updateDatabaseAndGetData called") 
+	console.log("updateDatabase called") 
 	
     // Parameters passed in spawn - 
     // 1. type_of_script 
@@ -32,14 +32,14 @@ app.get('/getAllData', (req, res) => {
     // 1. type_of_script 
     // 2. list containing Path of the script and arguments for the script
 	var spawn = require("child_process").spawnSync;
-    var process = spawn('python' ,["./read_all_database.py"]);
+    var process = spawn('python' ,["./read_all_database.py"]);    
     res.send(JSON.parse(process.stdout.toString()));
 });
 
 // API to get some data from database and return it in JSON format.
 // It expects 2 parameters: columnName and value.
 app.get('/getDataByColumnName', (req, res) => {
-	console.log("getData called") 
+	console.log("getDataByColumnName called. ColumnName=" + req.query.columnName + "; Value=" + req.query.value) 
 	
     // Parameters passed in spawn - 
     // 1. type_of_script 
