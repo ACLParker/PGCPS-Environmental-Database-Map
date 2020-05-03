@@ -96,7 +96,7 @@ var mymap;
 var markersLayer;
 
 function loadMap() {
-   mymap = L.map('mapid').setView([38.8162729,-76.7523043], 13);   
+   mymap = L.map('mapid').setView([38.8162729,-76.7523043], 10);   
    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
        maxZoom: 18,
@@ -104,16 +104,6 @@ function loadMap() {
        accessToken: 'pk.eyJ1IjoiYXNhbmRpbjIxOCIsImEiOiJjazNwZm5kZDEwMm5qM3BwZTVwcmJvNGtpIn0.Omg_ZXfDgjgWA2-Lukxfow'
    }).addTo(mymap);
    markersLayer = new L.LayerGroup();
-}
-
-function updateDatabase() {
-	console.log("Updating database with Google data.");
-	
-	fetch('/updateDatabase')
-		.then(res => {
-		      console.log("Database updated.");
-		      return res;
-		});
 }
 
 function populateEnvFeaturesDropDown() {
@@ -163,22 +153,41 @@ function populateSchoolNamesDropDown() {
    }); 
 }
 
-function clearSchoolRatingsSelection() {
-	var rbList = document.getElementsByName("filter");
-    for (var i = 0; i < rbList.length; i++) {
-    	if(rbList[i].checked) { 
-    		let rb = document.getElementById(rbList[i].id);
-    		rb.checked = false;
-    	}
-    }
+function populateEnvFeaturesDocumentation() {
+	console.log("Populating Environmental Features documentation.");
+   
+	var mydocumentation = document.getElementById("EnvFeatures");	
+	for (let feature of JSON_KEY_TO_OPTION_NAMES) {
+		let key = feature[0];
+		if(!key.endsWith("_comments") && !key.startsWith("section1_time_stamp") && 
+		   !key.startsWith("section1_school_name") && !key.startsWith("section1_email") &&			   				   
+		   !key.startsWith("section6_enviro_awards") && !key.startsWith("section6_actions_not_mentioned") && 
+		   !key.startsWith("latitude") && !key.startsWith("longitude")) {
+			let columnName = feature[1][0];
+			let description = feature[1][1]
+			let heading = document.createElement("h5");
+			let text = document.createTextNode(columnName);
+			heading.appendChild(text);
+			mydocumentation.appendChild(heading);
+	 
+			let para = document.createElement("p");
+			para.className += "text-grey";
+			text = document.createTextNode(description);
+			para.appendChild(text);
+			mydocumentation.appendChild(para);
+	 
+			let mybreak = document.createElement("br");
+			mydocumentation.appendChild(mybreak);
+		}
+	}
 }
 
 function displayMarkersByFeature() {
 	// Uncheck school rating radio buttons
 	clearSchoolRatingsSelection()
     
-   var myselect = document.getElementById("feature_filters_drop_down");
-   var feature = myselect.options[myselect.selectedIndex].value;   
+   let myselect = document.getElementById("feature_filters_drop_down");
+   let feature = myselect.options[myselect.selectedIndex].value;   
    
    console.log("Displaying markers for: " + feature);
    
@@ -243,6 +252,9 @@ function countYesForSection(schoolData, section) {
 function displayMarkersBySectionRating(section) {
    console.log("Displaying markers for school rating section: " + section);
    
+   // Set environmental features drop-down list to None
+   clearEnvFeaturesDropDownList();
+   
    // NOTE: The first thing we do here is clear the markers from the layer.
    markersLayer.clearLayers();
    
@@ -294,46 +306,67 @@ function loadDataBySchoolName() {
 	    		let text = document.createTextNode(name + " - " + value);
 	    		heading.appendChild(text);
 	    		mydocumentation.appendChild(heading);
-	     
-//	    		let para = document.createElement("p");
-//	    		para.className += "text-grey";
-//	    		text = document.createTextNode(value);
-//	    		para.appendChild(text);
-//	    		mydocumentation.appendChild(para);
-	     
-//	    		let mybreak = document.createElement("br");
-//	    		mydocumentation.appendChild(mybreak);
 	    	});
     });
 }
 
-function populateEnvFeaturesDocumentation() {
-	console.log("Populating Environmental Features documentation.");
+function updateDatabase() {
+	console.log("Updating database with Google data.");
+	
+	fetch('/updateDatabase')
+		.then(res => {
+		      console.log("Database updated.");
+		      return res;
+		});
+}
+
+function clearSchoolRatingsSelection() {
+	let rbList = document.getElementsByName("filter");
+    for (var i = 0; i < rbList.length; i++) {
+    	if(rbList[i].checked) { 
+    		let rb = document.getElementById(rbList[i].id);
+    		rb.checked = false;
+    	}
+    }
+}
+
+function clearEnvFeaturesDropDownList() {
+	// Set environmental features drop-down list to None
+	let sel = document.getElementById('feature_filters_drop_down');
+	sel.selectedIndex = 0;
+}
+
+function showDuplicates() {
+	console.log("Display duplicate schools");
+	
+	// Uncheck school rating radio buttons
+	clearSchoolRatingsSelection();
+	// Set environmental features drop-down list to None
+	clearEnvFeaturesDropDownList();
    
-	var mydocumentation = document.getElementById("EnvFeatures");	
-	for (let feature of JSON_KEY_TO_OPTION_NAMES) {
-		let key = feature[0];
-		if(!key.endsWith("_comments") && !key.startsWith("section1_time_stamp") && 
-		   !key.startsWith("section1_school_name") && !key.startsWith("section1_email") &&			   				   
-		   !key.startsWith("section6_enviro_awards") && !key.startsWith("section6_actions_not_mentioned") && 
-		   !key.startsWith("latitude") && !key.startsWith("longitude")) {
-			let columnName = feature[1][0];
-			let description = feature[1][1]
-			let heading = document.createElement("h5");
-			let text = document.createTextNode(columnName);
-			heading.appendChild(text);
-			mydocumentation.appendChild(heading);
-	 
-			let para = document.createElement("p");
-			para.className += "text-grey";
-			text = document.createTextNode(description);
-			para.appendChild(text);
-			mydocumentation.appendChild(para);
-	 
-			let mybreak = document.createElement("br");
-			mydocumentation.appendChild(mybreak);
-		}
-	}
+   // NOTE: The first thing we do here is clear the markers from the layer.
+   markersLayer.clearLayers();
+   
+   fetch('/getDuplicateSchools')   
+      .then(res => res.json())      
+      .then(res => {
+    	  for(var index = 0; index < res.length; index++) {
+    		  var latitude = res[index].latitude;
+    		  var longitude = res[index].longitude;    		  
+    		      		 
+	          // Create a marker
+	          var marker = L.marker([latitude, longitude]);
+	          // Add a popup to the marker
+	          marker.bindPopup(
+	                "<b>" + res[index]['section1_school_name'] + "</b><br>"
+	          ).openPopup();
+	          // Add marker to the layer. Not displayed yet.
+	          markersLayer.addLayer(marker);
+	     }
+	     // Display all the markers.
+	     markersLayer.addTo(mymap);
+	     return res;
+      });      
 }
 
 function displayAreaCovered() {
@@ -395,6 +428,9 @@ function openSurveyInfo() {
    tabcontent = document.getElementById("surveyInfoWrapper");
    tabcontent.style.display = "block";
    
+   let mydocumentation = document.getElementById("surveyInfoContent");
+   mydocumentation.innerHTML = ""
+		
    //loadSurveyInfoPage(); 
 }
 

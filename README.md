@@ -33,8 +33,10 @@
       <ul> http://localhost/getAllData</ul>
     <li>To update database with all data from Google surveys</li>
       <ul> http://localhost/updateDatabase </ul>
-    <li>To return the organization that matches the filter (Below is DOC org example)</li>
-      <ul> http://localhost/api/organization?filter=DOC </ul>
+    <li>To return records that match the query; when calumnName equals value</li>
+      <ul> http://localhost/getDataByColumnName?columnName=<column name>&value=<value to query></ul>
+    <li>To return records of schools that have the same name</li>
+      <ul> http://localhost/getDuplicateSchools</ul>
   </ol>
 <h1>Any expectations around known bugs and road-map for future development </h1>
   <p>There are no known bugs right now. Future development would spread our map to other counties, which may cause a bug
