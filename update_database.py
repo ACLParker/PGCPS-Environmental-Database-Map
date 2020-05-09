@@ -102,7 +102,9 @@ MYSQL_JSON_COLUMN_NAMES = [
     [64, "section6_enviro_awards", "TEXT"],
     [65, "section6_actions_not_mentioned", "TEXT"],
     [-1, "latitude", "FLOAT"],
-    [-1, "longitude", "FLOAT"]
+    [-1, "longitude", "FLOAT"],
+    [-1, "picture", "VARCHAR(200)"],
+    [-1, "website", "VARCHAR(200)"]
 ]
 
 ACTIVE_GARDENS = [
@@ -125,66 +127,68 @@ COMPOSTING = [
      "Open frame", "Send Compost to Local Composting Facility/Farm", "I don't know" 
 ]
 
-KNOWN_SCHOOLS_LAT_LON = [
-    ["International High School at Largo", 38.8859, -76.8234],
-    ["Gwynn Park High School", 38.7017, -77.1508],
-    ["Potomac High School", 38.8212, -76.9792],
-    ["Woodridge", 38.9507, -76.8937],
-    ["Cherokee Lane ES", 39.0051, -76.9656],
-    ["Suitland H/S", 38.8535, -76.9198],
-    ["Melwood Elementary School", 38.7907, -76.8404],
-    ["Paint Branch Elementary", 38.9868, -76.9285],
-    ["Langley Park - McCormick ES", 38.9940, -76.9831],
-    ["Robert R Gray Elementary School", 38.9088, -76.9247],
-    ["Berwyn Heights ES", 38.9921, -76.9114],
-    ["Oaklands Elementary", 39.0789, -76.8512],
-    ["Deerfield Run ES", 39.0711, -76.8487],
-    ["Highland Park ES", 38.9035, -76.8960],
-    ["Templeton ES", 38.9525, -76.9168],
-    ["Kingsford Elementary School", 38.9086, -76.7990],
-    ["Robert Godddard Montessori", 38.9883, -76.8447],
-    ["Rose Valley Elementary School", 38.7550, -76.9620],
-    ["Bond Mill Elementary", 39.1094, -76.8974],
-    ["Patuxent Elementary", 38.8274, -76.7119],
-    ["Ernest E. Just Middle School", 38.9072, -76.8319],
-    ["Panorama Elementary School", 38.8356, -76.9720],
-    ["Fort Foote Elementary", 38.7758, -77.0070],
-    ["Gwynn Park MS", 38.7069, -76.8709],
-    ["Laurel High School", 39.0942, -76.8702],
-    ["Kenilworth Elementary", 38.9591, -76.7368],
-    ["Benjamin Tasker MS", 38.9580, -76.7477],
-    ["Dodge Park Elementary", 38.9335, -76.8779],
-    ["Buck Lodge Middle School", 39.0108, -76.9617],
-    ["Nicholas Orem", 38.9641, -76.9621],
-    ["Marlton Elementary School", 38.7725, -76.7913],
-    ["Gladys Noon Spellman Elementary", 38.9308, -76.9095],
-    ["Hollywood Elementary", 39.0151, -76.9250],
-    ["Glassmanor Elementary", 38.8171, -76.9924],
-    ["University Park Elementary School", 38.9706181, -76.9456526],
-    ["Chesapeake Math and IT - South (CMIT-South)", 38.8031642, -76.8424456],
-    ["Greenbelt Elementary", 39.0123162, -76.8793746],
-    ["High Bridge Elementary", 38.9868884, -76.7745284],
-    ["Benjamin Foulois CPAA", 38.8269309, -76.8888203],
-    ["Stephen Decatur Middle School", 38.7766004, -76.9106298],
-    ["Thomas Johnson Middle School",  38.960509, -76.843261],
-    ["Annapolis Road Academy", 38.9192886, -76.7611796],
-    ["Rogers Heights Elementary School", 38.9451163, -76.9148903],
-    ["Whitehall Elementary School", 38.9895601, -76.7534197],
-    ["Suitland Elementary School", 38.8528125, -76.9295593],
-    ["Eleanor Roosevelt High School", 38.9940431, -76.8716383],
-    ["Dr. Henry A Wise Jr. High School", 38.8337263, -76.7908283],
-    ["Fairmont Heights High School", 38.9177687, -76.8966939],
-    ["CENTRAL HS@Forestvill", 38.836129, -76.8875897],
-    ["Friendly High School", 38.7519549, -76.9706354],
-    ["Magnolia ES", 38.9838055, -76.8642313],
-    ["Parkdale High School", 38.9696933, -76.9068296],
-    ["Frederick Douglass High School", 38.7815367, -76.7838189],
-    ["Northwestern HS", 38.9752874, -76.9562757],
-    ["Dora Kennedy French Immersion", 38.9975238, -76.9046507],
-    ["Andrew Jackson Academy", 38.8404724, -76.9106414],
-    ["Concord ES", 38.8629843, -76.9101987],
-    ["Charles Herbert Flowers High School", 38.9315768, -76.8373013],
-    ["Bladensburg HS", 38.942617, -76.9206946]
+KNOWN_SCHOOLS_INFO = [
+    ["Andrew Jackson Academy", 38.8404724, -76.9106414,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Academies/New AJA Building pic1.png", "https://www.pgcps.org/andrewjackson/"],
+    ["Annapolis Road Academy", 38.9192886, -76.7611796,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/High_Schools/Annapolis_Road/Pictures/IMG_0134.jpg", "https://www.pgcps.org/annapolisroad/"],
+    ["Benjamin Foulois CPAA", 38.8269309, -76.8888203,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Academies/benjamin foulois.jpg", "https://www.pgcps.org/benjaminfoulois/"],
+    ["Benjamin Tasker MS", 38.9580, -76.7477,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Middle/Benjamin Tasker MS.jpg", "https://www.pgcps.org/benjamintasker/"],
+    ["Berwyn Heights ES", 38.9921, -76.9114,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/berwyn.jpg?n=1766", "https://www.pgcps.org/berwynheights/"],
+    ["Bladensburg HS", 38.942617, -76.9206946,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/Bladensburg High.jpg", "https://www.pgcps.org/bladensburghs/"],
+    ["Bond Mill Elementary", 39.1094, -76.8974,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/bondmill.jpg", "https://www.pgcps.org/bondmill"],
+    ["Buck Lodge Middle School", 39.0108, -76.9617,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Middle/Buck Lodge.jpg", "https://www.pgcps.org/bucklodge/"],
+    ["CENTRAL HS@Forestvill", 38.836129, -76.8875897,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/Central HS.jpg", "https://www.pgcps.org/central/"],
+    ["Charles Herbert Flowers High School", 38.9315768, -76.8373013,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/Charles H. Flowers.jpg", "https://www.pgcps.org/charleshflowers/"],
+    ["Cherokee Lane ES", 39.0051, -76.9656,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/IMG_4538.JPG?n=7987", "https://www.pgcps.org/cherokeelane/"],
+    ["Chesapeake Math and IT - South (CMIT-South)", 38.8031642, -76.8424456,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Charter/cmite.jpg?n=7731", "https://www.pgcps.orghttp://www.cmitsouthelementary.org/"],
+    ["CMIT South Public Charter School", 38.8050457,-76.8409654,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Charter/cmite.jpg?n=7731", "http://www.cmitsouthelementary.org"],
+    ["Cool Spring ES", 39.0021151,-76.9759007,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Elementary_Schools/Cool_Spring/b56a4bc68bac4e11941c2644f0c71d61.jpg", "https://www.pgcps.org/coolspring/"],
+    ["Concord ES", 38.8629843, -76.9101987,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/concord.jpg", "https://www.pgcps.org/concord/"],
+    ["Deerfield Run ES", 39.0711, -76.8487,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Deerfield Run.jpg", "https://www.pgcps.org/deerfieldrun/"],
+    ["Dodge Park Elementary", 38.9335, -76.8779,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/dodge%20park.jpg", "https://www.pgcps.org/dodgepark/"],
+    ["Dora Kennedy French Immersion", 38.9975238, -76.9046507,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Academies/dkfi-sign_1_orig.jpg", "https://www.pgcps.org/dorakennedy/"],
+    ["Dr. Henry A Wise Jr. High School", 38.8337263, -76.7908283,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/Dr. Henry A. Wise HS.jpg", "https://www.pgcps.org/drhenrywisejr/"],
+    ["Eleanor Roosevelt High School", 38.9940431, -76.8716383,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/Eleanor Roosevelt HS.jpg", "https://www.pgcps.org/eleanorroosevelt"],
+    ["Ernest E. Just Middle School", 38.9072, -76.8319,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Middle/Ernest Everett Just.jpg", "https://www.pgcps.org/ernesteverettjust/"],
+    ["Fairmont Heights High School", 38.9177687, -76.8966939,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/FHHS_7551.JPG", "https://www.pgcps.org/fairmontheights/"],
+    ["Fort Foote Elementary", 38.7758, -77.0070,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/fortefoote.jpg", "https://www.pgcps.org/fortfoote/"],
+    ["Frederick Douglass High School", 38.7815367, -76.7838189,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/douglass.jpg", "https://www.pgcps.org/douglass/"],
+    ["Friendly High School", 38.7519549, -76.9706354,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/Friendly HS.jpg", "https://www.pgcps.org/friendly/"],
+    ["Gladys Noon Spellman Elementary", 38.9308, -76.9095,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Gladys Noon Spellman.jpg", "https://www.pgcps.org/gladysnoonspellman/"],
+    ["Glassmanor Elementary", 38.8171, -76.9924,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Glassmanor ES.jpg", "https://www.pgcps.org/glassmanor/"],
+    ["Greenbelt Elementary", 39.0123162, -76.8793746,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Greenbelt ES.jpg", "https://www.pgcps.org/greenbeltes/"],
+    ["Gwynn Park High School", 38.7017, -77.1508,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/Gwynn Park HS.jpg", "https://www.pgcps.org/gwynnparkhs/"],
+    ["Gwynn Park MS", 38.7069, -76.8709,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Middle_Schools/Gwynn_Park/Rotating_Stories/schoolphoto 2.jpg?n=9313", "https://www.pgcps.org/gwynnparkms/"],
+    ["High Bridge Elementary", 38.9868884, -76.7745284,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/High Bridge ES.jpg", "https://www.pgcps.org/highbridge/"],
+    ["Highland Park ES", 38.9035, -76.8960,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Highland Park ES.jpg", "https://www.pgcps.org/highlandpark/"],
+    ["Hollywood Elementary", 39.0151, -76.9250,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Hollywood ES.jpg", "https://www.pgcps.org/hollywood/"],
+    ["International High School at Largo", 38.8859, -76.8234,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/Largo HS.jpg?n=7335", "https://www.pgcps.org/ihslargo"],
+    ["Kenilworth Elementary", 38.9591, -76.7368,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Kenilworth ES.jpg", "https://www.pgcps.org/kenilworth/"],
+    ["Kingsford Elementary School", 38.9086, -76.7990,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Kingsford ES.jpg", "https://www.pgcps.org/kingsford"],
+    ["Langley Park - McCormick ES", 38.9940, -76.9831,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Langley Park.jpg", "https://www.pgcps.org/langleyparkmccormick/"],
+    ["Laurel High School", 39.0942, -76.8702,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/Largo HS.jpg", "https://www.pgcps.org/largo/"],
+    ["Magnolia ES", 38.9838055, -76.8642313,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Magnolia ES.jpg", "https://www.pgcps.org/magnolia/"],
+    ["Marlton Elementary School", 38.7725, -76.7913,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Marlton ES.jpg", "https://www.pgcps.org/marlton/"],
+    ["Melwood Elementary School", 38.7907, -76.8404,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Melwood new front entrance pic.jpg", "https://www.pgcps.org/melwood/"],
+    ["Nicholas Orem", 38.9641, -76.9621,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Middle/Nicholas Orem MS.jpg", "https://www.pgcps.org/nicholasorem/"],
+    ["Northwestern HS", 38.9752874, -76.9562757,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/Northwestern HS(1).jpg", "https://www.pgcps.org/northwestern"],
+    ["Oaklands Elementary", 39.0789, -76.8512,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Oaklands ES.jpg", "https://www.pgcps.org/oaklands/"],
+    ["Paint Branch Elementary", 38.9868, -76.9285,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Paint Branch ES.jpg", "https://www.pgcps.org/paintbranch/"],
+    ["Panorama Elementary School", 38.8356, -76.9720,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Panorama ES.jpg", "https://www.pgcps.org/panorama/"],
+    ["Parkdale High School", 38.9696933, -76.9068296,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/parkdale.jpg", "https://www.pgcps.org/parkdale/"],
+    ["Patuxent Elementary", 38.8274, -76.7119,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Patuxent ES.jpg", "https://www.pgcps.org/patuxent/"],
+    ["Potomac High School", 38.8212, -76.9792,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/Potomac HS.jpg", "https://www.pgcps.org/potomac"],
+    ["Robert Godddard Montessori", 38.9883, -76.8447,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Robert Goddard Montessori.jpg", "https://www.pgcps.org/robertgoddardmontessori/"],
+    ["Robert R Gray Elementary School", 38.9088, -76.9247,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Robert R Gray.jpg", "https://www.pgcps.org/robertrgray/"],
+    ["Rogers Heights Elementary School", 38.9451163, -76.9148903,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Rogers Heights ES.jpg", "https://www.pgcps.org/rogersheights/"],
+    ["Rose Valley Elementary School", 38.7550, -76.9620,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Rose Valley photo.jpg", "https://www.pgcps.org/rosevalley/"],
+    ["Stephen Decatur Middle School", 38.7766004, -76.9106298,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Middle/Stephen Decatur MS.jpg", "https://www.pgcps.org/stephendecatur/"],
+    ["Suitland Elementary School", 38.8528125, -76.9295593,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Suitland Picture.jpg", "https://www.pgcps.org/suitlandes/"],
+    ["Suitland H/S", 38.8535, -76.9198,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/High/Suitland HS.jpg", "https://www.pgcps.org/suitlandhs/"],
+    ["Templeton ES", 38.9525, -76.9168,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Templeton ES.jpg", "https://www.pgcps.org/templeton/"],
+    ["Thomas Johnson Middle School",  38.960509, -76.843261,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Middle/Thomas Johnson MS.jpg", "https://www.pgcps.org/thomasjohnson/"],
+    ["University Park Elementary School", 38.9706181, -76.9456526,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/University Park ES.jpg", "https://www.pgcps.org/universitypark/"],
+    ["Whitehall Elementary School", 38.9895601, -76.7534197,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/Whitehall ES.jpg", "https://www.pgcps.org/whitehall/"],
+    ["Woodridge", 38.9507, -76.8937,"https://www.pgcps.org/uploadedImages/Schools_and_Centers/Splash_Pages/Elementary/collage (1).png", "https://www.pgcps.org/woodridge/"]
 ]
 
 
@@ -207,6 +211,30 @@ def getValuesFromGoogle():
     
     return rowValues
     
+
+# Function to retrieve the PGC Public School Info: website and picture links.
+# Return a list of rows with its respective data 
+def getValuesFromPGCPublicSchool():
+    rowValues = []
+    page = requests.get("https://www.pgcps.org/schools/")
+    
+    # Call your results page through the Beautiful Soup package
+    soup = BeautifulSoup(page.text, features="html.parser")
+    worksheet = soup.find("table", id="table1")
+    for rows in worksheet.find_all(name="tr"):
+        line = ""
+        a = 0
+        for column in rows.find_all('td'):
+            if a == 0:
+                line += column.find("a").text + ","
+            elif a == 1:
+                line += "\"https://www.pgcps.org" + column.find("img")['src']
+            elif a == 3:
+                line += "\", \"https://www.pgcps.org" + column.find("a")['href'] + "\""
+            a += 1
+        print(line)        
+
+
 # Function to delete previous table and create a new one
 def createDatabaseTable(mycursor):
     sql = "CREATE DATABASE IF NOT EXISTS pgcps_environmental_lit"
@@ -249,12 +277,13 @@ def getValuesForComposting(googleValue, composting):
         return '"Yes",'    
     return '"No",'
 
-def getSchoolLatLonValues(schoolName):
-    for schoolLatLon in KNOWN_SCHOOLS_LAT_LON:
-        if schoolLatLon[0].find(schoolName) != -1:
-            return str(schoolLatLon[1]) + "," + str(schoolLatLon[2]) + "," 
+def getSchoolAdditionalInfo(schoolName):
+    for schoolInfo in KNOWN_SCHOOLS_INFO:
+        if schoolInfo[0].find(schoolName) != -1:
+            return str(schoolInfo[1]) + "," + str(schoolInfo[2]) + ",\"" + str(schoolInfo[3]) + "\",\"" + str(schoolInfo[4]) + "\"," 
 
-    return "38.7849,-76.8721,"  ## Default value if we don't find the school
+    return "38.7849,-76.8721,'Data Not Available','Data Not Available',"  ## Default value if we don't find the school
+
 
 # Function to delete previous table and create a new one
 # Some data has double-quotes (") so I had to escape the 
@@ -273,7 +302,7 @@ def populateDatabase(mycursor, rows):
             sql = "INSERT INTO pgcps_environmental_info VALUES ("
             for column in MYSQL_JSON_COLUMN_NAMES:            
                 if column[0] != -1:
-                    googleValue = row[column[0]]
+                    googleValue = row[column[0]].strip()
                     if column[0] == 4:
                         sql += getValuesForActiveGargen(googleValue, ACTIVE_GARDENS[activeGardenCounter])
                         activeGardenCounter += 1
@@ -289,7 +318,7 @@ def populateDatabase(mycursor, rows):
                     else:
                         sql += "\"" + googleValue.replace("\"", "\\\"") + "\","
                 
-            sql += getSchoolLatLonValues(row[2])  # row[2] is the school name                
+            sql += getSchoolAdditionalInfo(row[2].strip())  # row[2] is the school name
             sql = sql[:-1]  ## Remove the last character (a comma)
             sql += ")"
             mycursor.execute(sql)
@@ -299,6 +328,7 @@ def populateDatabase(mycursor, rows):
 ## MAIN PROGRAM
 ################
 rowValues = getValuesFromGoogle()
+#getValuesFromPGCPublicSchool()
 
 mydb = pymysql.connect(host='localhost',
                       user='root',

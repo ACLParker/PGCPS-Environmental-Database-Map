@@ -20,7 +20,7 @@ app.get('/updateDatabase', (req, res) => {
     // 1. type_of_script 
     // 2. list containing Path of the script and arguments for the script
 	var spawn = require("child_process").spawnSync;
-    var process = spawn('python' ,["./update_database.py"]);
+    var process = spawn('python' ,["./update_database.py"]);    
     res.send(JSON.parse(process.stdout.toString()));
 });
 

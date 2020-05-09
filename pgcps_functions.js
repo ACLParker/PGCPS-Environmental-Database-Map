@@ -89,7 +89,9 @@ const JSON_KEY_TO_OPTION_NAMES = new Map([
     ["section6_enviro_awards", ["Section 6: Environmental Awards", ""]],
     ["section6_actions_not_mentioned", ["Section 6: Actions Not Mentioned", ""]],
     ["latitude", ["Latitude", "Latitude coordinate for school"]],
-    ["longitude", ["Longitude", "Longitude coordinate for school"]]
+    ["longitude", ["Longitude", "Longitude coordinate for school"]],
+    ["picture", ["Picture", "School Picture"]],
+    ["website", ["Website", "School Website"]]
 ]);
 
 var mymap;
@@ -207,7 +209,9 @@ function displayMarkersByFeature() {
 			          var marker = L.marker([latitude, longitude]);
 			          // Add a popup to the marker
 			          marker.bindPopup(
-			                "<b>" + res[index]['section1_school_name'] + "</b><br>"
+			                "<b>" + res[index]['section1_school_name'] + "</b><br>" +
+			                "Website: <a target='_blank' href='" + res[index].website + "'>" + res[index].website + "</a><br>" +
+			                "<img src='" + res[index].picture + "' style='width: 200px; height: 150px' /><br>"
 			          ).openPopup();
 			          // Add marker to the layer. Not displayed yet.
 			          markersLayer.addLayer(marker);
@@ -275,8 +279,10 @@ function displayMarkersBySectionRating(section) {
               
              // Add a popup to the circle
              circle.bindPopup(
-                    "<b>" + res[index].section1_school_name + "</b><br>" +
-                    "Total Yes: " + numberYes
+            		 "<b>" + res[index]['section1_school_name'] + "</b><br>" +
+            		 "Total Yes: " + numberYes + "<br>" +
+		             "Website: <a target='_blank' href='" + res[index].website + "'>" + res[index].website + "</a><br>" +
+		             "<img src='" + res[index].picture + "' style='width: 200px; height: 150px' /><br>"		                
              ).openPopup();
               
              // Add marker to the layer. Not displayed yet.
@@ -358,7 +364,9 @@ function showDuplicates() {
 	          var marker = L.marker([latitude, longitude]);
 	          // Add a popup to the marker
 	          marker.bindPopup(
-	                "<b>" + res[index]['section1_school_name'] + "</b><br>"
+	        		  "<b>" + res[index]['section1_school_name'] + "</b><br>" +	            		 
+			          "Website: <a target='_blank' href='" + res[index].website + "'>" + res[index].website + "</a><br>" +
+			          "<img src='" + res[index].picture + "' style='width: 200px; height: 150px' /><br>"
 	          ).openPopup();
 	          // Add marker to the layer. Not displayed yet.
 	          markersLayer.addLayer(marker);
